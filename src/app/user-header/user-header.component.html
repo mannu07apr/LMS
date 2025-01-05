@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div class="lmslogo"> <img src="/assets/lms_logo.jpg" alt="Excelonline" /> </div>
+  <div class="nav-links" id="nav-links">
+
+    <a *ngIf="isAdmin()" href="upload" class="app-button">
+      <img width="30px" src="/assets/upload_file.png">
+      <span>Create Course</span>
+    </a>
+    <a href="course" class="app-button active">
+      <img width="30px" src="/assets/video_library.png">
+      <span>View Course</span>
+    </a>
+    <a *ngIf="!isAdmin()" href="profile?userid={{loggedinuser}}" class="app-button">
+      <img width="30px" src="/assets/manage_accounts.png">
+      <span>Profile</span>
+    </a>
+    <a href="event" class="app-button">
+      <img width="30px" src="/assets/event.png">
+      <span>Event</span>
+    </a>
+    <a href="userpanel" class="app-button">
+      <img width="30px" src="/assets/membership.png">
+      <span>Dashboard</span>
+    </a>
+    <a href="" (click)="toggleLogin()" class="app-button">
+      <img width="30px" [src]="buttonImage">
+      <span> {{ buttonText }}</span>
+    </a>
+  </div>
+
+</nav>

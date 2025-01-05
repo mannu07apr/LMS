@@ -1,0 +1,26 @@
+.rating-container {
+  display: flex;
+  justify-content: flex-start;
+  vertical-align: middle;
+  padding-left: 10px;
+  padding-top: 8px;
+}
+
+.stars {
+    margin: -12px 10px 0px 10px;    
+  vertical-align: middle;
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.stars span {
+  font-size: 2rem;
+  color: rgb(166, 10, 10);
+  transition: color 0.2s;
+}
+
+.stars span.active,
+.stars span:hover {
+  color: gold;
+}

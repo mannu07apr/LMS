@@ -1,0 +1,17 @@
+<div class="mpcontainer">
+  <div class="leftcontainer">
+    <app-sitebar> </app-sitebar>
+  </div>
+  <div class="rightcontainer">
+    <div class="app-container">
+      <div class="app" *ngFor="let item of servicesicon">
+        <div>
+          <img src="/assets/{{ item }}.png" />
+        </div>
+
+        <h2>{{ item }}</h2>
+        <p>Description of {{ item }}</p>
+      </div>
+    </div> 
+</div>
+</div>

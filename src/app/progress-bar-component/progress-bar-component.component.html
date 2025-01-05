@@ -1,0 +1,9 @@
+<div class="progress-container">
+    <div
+      class="progress-bar"
+      [style.width.%]="numericPercentage"
+      [style.backgroundColor]="numericPercentage === 100 ? 'green' : '#007bff'"
+    >
+      {{ percentage }}
+    </div>
+  </div>

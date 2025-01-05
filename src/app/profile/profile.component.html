@@ -1,0 +1,162 @@
+<div class="container">
+    <h1>User Profile</h1>
+    <a *ngIf="usertype=='Admin'" class="back-button" href="users"><img width="24px" src="/assets/backarrow.png">Back to User List</a>
+    <a *ngIf="usertype!='Admin'" class="back-button" href="userpanel"><img width="24px" src="/assets/backarrow.png">  Dashboard</a>
+
+    <form #profileform="ngForm" (submit)="CreateUserProfile()">
+        <div class="row">
+            <div class="col">
+                <div class="profile-photo">
+                    <img src="{{imgURL}}" class="profilepic">
+                </div>
+                <div class="input-group mb-3">
+
+                    <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03"
+                        (click)="upload()">Upload</button>
+                    <input type="file" class="form-control" id="file" aria-describedby="file" aria-label="Upload"
+                        (change)="onFileSelected($event)">
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your Full Name"
+                        class="form-control" style="width: 100%" (input)="onNameInput()"
+                        [(ngModel)]="userprofile.fullName" />
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="fathersName">Father's Name:</label>
+
+                    <input type="text" id="fathersName" name="fathersName" class="form-control"
+                        [(ngModel)]="userprofile.fathersName" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" class="form-control" [(ngModel)]="userprofile.dob">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="mobileNo">Mobile No:</label>
+                    <input type="text" id="mobileNo" name="mobileNo" class="form-control"
+                        [(ngModel)]="userprofile.mobileNo">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="alternateMobileNo">Alternate Mobile No:</label>
+                    <input type="text" id="alternateMobileNo" name="alternateMobileNo" class="form-control"
+                        [(ngModel)]="userprofile.alternateMobileNo">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" [(ngModel)]="userprofile.email">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="personalEmail">Personal Email:</label>
+                    <input type="email" id="personalEmail" name="personalEmail" class="form-control"
+                        [(ngModel)]="userprofile.personalEmail">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" class="form-control"
+                        [(ngModel)]="userprofile.address">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="state">State:</label>
+                    <select id="state" name="state" class="form-control" [(ngModel)]="userprofile.state">
+                        <option value="" disabled selected>Select your state</option>
+                        <option value="andhraPradesh">Andhra Pradesh</option>
+                        <option value="arunachalPradesh">Arunachal Pradesh</option>
+                        <option value="assam">Assam</option>
+                        <option value="bihar">Bihar</option>
+                        <option value="chhattisgarh">Chhattisgarh</option>
+                        <option value="goa">Goa</option>
+                        <option value="gujarat">Gujarat</option>
+                        <option value="haryana">Haryana</option>
+                        <option value="himachalPradesh">Himachal Pradesh</option>
+                        <option value="jharkhand">Jharkhand</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="kerala">Kerala</option>
+                        <option value="madhyaPradesh">Madhya Pradesh</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="manipur">Manipur</option>
+                        <option value="meghalaya">Meghalaya</option>
+                        <option value="mizoram">Mizoram</option>
+                        <option value="nagaland">Nagaland</option>
+                        <option value="odisha">Odisha</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="rajasthan">Rajasthan</option>
+                        <option value="sikkim">Sikkim</option>
+                        <option value="tamilNadu">Tamil Nadu</option>
+                        <option value="telangana">Telangana</option>
+                        <option value="tripura">Tripura</option>
+                        <option value="uttarPradesh">Uttar Pradesh</option>
+                        <option value="uttarakhand">Uttarakhand</option>
+                        <option value="westBengal">West Bengal</option>
+                        <option value="andamanNicobar">Andaman and Nicobar Islands</option>
+                        <option value="chandigarh">Chandigarh</option>
+                        <option value="dadraNagarHaveli">Dadra and Nagar Haveli</option>
+                        <option value="damanDiu">Daman and Diu</option>
+                        <option value="lakshadweep">Lakshadweep</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="puducherry">Puducherry</option>
+                        <option value="ladakh">Ladakh</option>
+                        <option value="jammuKashmir">Jammu and Kashmir</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" class="form-control" [(ngModel)]="userprofile.city">
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="pincode" name="pincode" class="form-control"
+                        [(ngModel)]="userprofile.pincode">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-6 offset-md-3 text-center"> <button type="submit" class="custom-button">Update
+                    Profile</button>
+                {{message}}</div>
+
+        </div>
+
+
+
+
+    </form>
+</div>

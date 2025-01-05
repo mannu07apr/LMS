@@ -1,0 +1,30 @@
+
+#uploaded-list {
+    list-style: none;
+    padding: 0;
+}
+
+#uploaded-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+}
+
+#uploaded-list li button {
+    background-color: #FF0000;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+#uploaded-list li button:hover {
+    background-color: #CC0000;
+}
+h2{
+    font-size: 20px;
+}

@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    /* font-family: Arial, sans-serif; */
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.video-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.video-container video {
+    max-width: 100%;
+    height: auto;
+}
+
+.video-controls {
+    margin-top: 10px;
+}
+
+.video-controls button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.video-controls button:hover {
+    background-color: #0056b3;
+}
+
+.course-list {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.course-list h2 {
+    margin-top: 0;
+}
+
+.course-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.course-list ul li {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    margin-bottom: 5px;
+}
+
+.course-list ul li:hover {
+    background-color: #e9ecef;
+}
+
+@media (max-width: 768px) {
+    .video-container, .course-list {
+        flex: none;
+        width: 100%;
+    }
+    .container {
+        flex-direction: column;
+    }
+
+ 
+
+    .course-list {
+        order: -1;
+    }
+}

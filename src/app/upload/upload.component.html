@@ -1,0 +1,88 @@
+<header class="container">
+    <h1>Upload Course</h1>
+    <a class="btn-sm btn-info" href="adminpanel">Admin Panel</a>
+</header>
+<hr>
+<main class="container">
+    <section id="upload-section">
+        <h2>Add Course</h2>
+        <form #signupform="ngForm" (submit)="CreatCourseMaster()">
+            <div class="row">
+                <div class="col">
+                    <label for="courseName">Course Name:</label>
+                    <input [(ngModel)]="coursedata.courseName" type="text" id="courseName" name="courseName" required  appFocus
+                    #nameInput>
+                </div>
+                <div class="col">
+                    <label for="type">Type:</label>
+                    <select id="typelsit" name="type" [(ngModel)]="coursedata.type">
+                        <option value="Bronze">Bronze</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Platinum">Platinum</option>
+                        <option value="Diamond">Diamond</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="type">Price:</label>
+                    <input [(ngModel)]="coursedata.price" type="text" id="price" name="price" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="imageName">Image :</label>
+                    <input class="form-control" required type="file" id="file" (change)="onChange($event)"
+                        accept=".jpg,.jpeg,.bmp">
+                </div>
+                <div class="col">
+                    <label>{{ message }}</label>
+                    <br>
+                    <input class="btn-sm custom-button" style="height: 40px;" type="submit" value="Upload" />
+                </div>
+            </div>
+            <div class="field">
+                <img *ngFor="let file of imgURL" width="50" src="{{file}}">
+            </div>
+        </form>
+    </section>
+    <hr>
+    <section id="Course-List">
+        <h2>Course List</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Image</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Created Date</th>
+                    <th>Add Content</th>
+                    <th>View Content</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of courses">
+                    <td>{{ course.courseID }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td> <img width="50" [src]="'assets/course/' + course.imageName" alt="{{ course.courseName }}"></td>
+                    <td>{{ course.type }}</td>
+                    <td>{{ course.price | currency:'INR':'symbol':'1.2-2' }}</td>
+                    <td>{{ course.createdDate | date:'mediumDate' }}</td>
+                    <td>
+                        <button (click)="AddCourseContent(course.courseName,course.courseID)" class="btn btn-link">Add
+                            Content</button>
+                    </td>
+                    <td>
+                        <button (click)="ViewourseContent(course.courseID)" class="btn btn-link">View Content</button>
+                    </td>
+                    <td>
+                        <button (click)="deleteCourse(course.courseID)" class="btn btn-link">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>

@@ -1,0 +1,104 @@
+<header class="container">
+    <h1>Upload Course Content</h1>
+</header>
+<hr>
+<main class="container">
+    <a class="back-button" href="upload"><img width="24px" src="/assets/backarrow.png">Back to course</a>
+    <section id="upload-section">
+        <h2>Course Content</h2>
+        <form #signupform="ngForm" (submit)="CreatCourseContent()">
+            <div class="row p-2">
+                <div class="col">
+                    <label for="courseName">Course Name:</label>
+                    <input type="text" id="coursename" name="coursename" value="{{selectedcourse}}">
+                </div>
+                <div class="col">
+                    <label for="type">Section Name:</label>
+                    <input [(ngModel)]="coursedata.sectionName" type="text" id="SectionName" name="SectionName"
+                        required>
+                </div>
+                <div class="col">
+                    <label for="ContentName">Content Name:</label>
+                    <input [(ngModel)]="coursedata.contentName" type="text" id="ContentName" name="ContentName"
+                        required>
+                </div>
+                <div class="col">
+                    <label for="ContentOrder">Order:</label>
+                    <input [(ngModel)]="coursedata.order" type="number" id="ContentOrder" name="ContentOrder" required>
+                </div>
+
+
+            </div>
+
+            <div class="row p-2">
+                <div class="col">
+                    <input class="form-control" required type="file" id="file" (change)="onChange($event)"
+                        accept="video/*">
+
+                </div>
+                <div class="col">
+                    <button class="btn-sm" type="submit" value="Create Content">{{btntext}}</button>
+                    <img *ngIf="uploaded" width="40" src="/assets/loading.gif">
+                </div>
+                <div class="col">
+                    <button id="clear-button" type="button" (click)="clearForm()">Clear</button>
+                </div>
+                <div class="col">
+                    <p>Video Duration: {{ mediaService.convertSeconds (videoDuration) }} </p>
+                    <video #videoElement hidden></video>
+                </div>
+
+            </div>
+            <div class="row p-2">
+                <div class="col">
+                    <label style="font-weight: bold;font-size: large;" *ngIf="progress ==0"> {{ message }}</label>
+                    <div class="progress" *ngIf="progress > 0">
+                        <div class="progress-bar" role="progressbar" [style.width.%]="progress"
+                            [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </section>
+    <hr>
+    <section id="Course-Content-List">
+        <h2>Course Content List</h2>
+        <table datatable class="table table-bordered">
+            <thead>
+                <tr style="font-size: 15px;color: white;background-color: grey;">
+                    <th [width]="20">Content ID</th>
+                    <th>Course ID</th>
+                    <th>Section</th>
+                    <th>Content Name</th>
+                    <th>Video File Name</th>
+                    <th>Duration</th>
+                    <th [width]="130">Created Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Order</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 15px;">
+                <tr *ngFor="let content of courseContents" [ngClass]="{'selected-item': content === selectedItem}">
+                    <td>{{ content.courseContentID }}</td>
+                    <td>{{ content.courseID }}</td>
+                    <td>{{ content.sectionName }}</td>
+                    <td>{{ content.contentName }}</td>
+                    <td>{{ content.videoFileName }}</td>
+                    <td>{{ mediaService.convertSeconds(content.duration) }}</td>
+                    <td>{{ content.createdDate | date: 'mediumDate' }}</td>
+                    <td>
+                        <button (click)="EditCourseContent(content.courseContentID)" class="btn btn-link">Edit</button>
+                    </td>
+                    <td>
+                        <button (click)="DeleteCourseContent(content.courseContentID)"
+                            class="btn btn-link">Delete</button>
+                    </td>
+                    <td>{{content.order}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+</main>

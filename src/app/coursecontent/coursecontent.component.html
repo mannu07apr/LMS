@@ -1,0 +1,82 @@
+<div class="content-container">
+    <div class="content-left">
+        <img class="img" src="/assets/course/{{thumbimg}}" />
+
+    </div>
+    <div class="content-right">
+        <div style=" display: flex;justify-content: space-between;">
+            <div>
+                <a class="btn-sm btn-info" href="course">
+                    <img width="18px" src="/assets/backarrow.png">
+                    Back to courses</a>
+            </div>
+            <div>
+                <a class="btn-sm btn-info" href="imgcration">
+                    <img width="18px" src="/assets/rightarrow.png">
+                    Continue</a>
+            </div>
+        </div>
+        <div style=" display: flex;justify-content: space-between; margin-top: 5px;">
+            <div class="course-title">
+                {{coursetitle}}
+            </div>
+        </div>
+
+        <div
+            style="padding: 5px 10px; border-radius: 10px; background-color: rgb(228, 179, 250); display: flex;justify-content:flex-start; margin-top: 5px;">
+            <div>
+                <img width="32px" src="/assets/thumbsup.png">
+            </div>
+            <div style="padding-left: 10px;">
+                <div>Congratulation! You have completed the course.</div>
+                <div style="color: rgb(209, 8, 8);font-weight: bold;"> Download Certificate</div>
+            </div>
+
+        </div>
+        <div
+            style=" border-radius: 10px; background-color: rgb(228, 179, 250); display: flex;justify-content:flex-start; margin-top: 5px;">
+            <app-rate-this-course></app-rate-this-course>
+        </div>
+
+        <!-- <div class="content-total-name"> {{contenttext}}</div> -->
+        <div class="content-total-name">
+            <div *ngFor="let progress of courseProgress">
+                <div *ngIf="progress.courseID== courseid">
+
+                    Total Duration : {{progress.totalCourseTime}} ■ Total watched
+                    :{{progress.totalWatchedTime}} ■ Progress : {{progress.totalProgress}}
+                </div>
+                <app-progress-bar-component [percentage]="progress.totalProgress"></app-progress-bar-component>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-list">
+    <div class="content-title">
+        Content
+    </div>
+    <div class="content-detail">{{contenttext}}</div>
+    <div *ngFor="let section of sectionlist ">
+        <div class="section-name"> {{ section }}</div>
+        <div class="video-list">
+            <div *ngFor="let content of courseContents let i=index">
+                <div *ngIf="content.sectionName== section">
+                    <div class="textright">
+                        <img *ngIf="content.watchedTime==content.duration" width="24px" src="/assets/completed.png">
+                        <img *ngIf="content.watchedTime!=content.duration" width="24px" src="/assets/inprogress.png">
+
+                        <a (click)="PlayContent(content.contentName,content.videoFileName , content.courseContentID )"><span
+                                class="content-name">{{ content.order }} - {{
+                                content.contentName }} ({{content.courseContentID}} / {{content.progressId}})</span></a>
+                        <br>
+                        <span class="content-time">
+                            {{content.totalWatchedTime}} / {{content.totalCourseTime}} -
+                            {{content.totalProgress}}</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+
+.signup-containter
+{
+    background-color: #ab7c4c;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.signup-right ,.signup-left {
+    margin: 15px 5px 5px 5px;
+    border: 1px solid #373737;
+    border-radius: 10px;
+    background-color: aliceblue;
+    width: 100%;
+}
+
+h2{
+    text-align: center;
+}
+label{
+    font-size: 16px;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    padding: 10px;
+   
+}
+
+/* Video Section */
+video {
+    width: 100%;
+    display: block;
+    /* border: 5px solid #0073e6; */
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    h2{
+        text-align: center;
+    }
+    .signup-containter
+    {        
+        flex-direction: column;
+        justify-content: center;
+    }
+    video{
+        width: 100%;
+    }
+    .signup-right ,.signup-left {
+        margin:10px auto;
+        width: 90%;
+     
+          }
+    
+  }
+  @media only screen and (max-width: 820px) {
+    .signup-containter
+    {        
+        flex-direction: column;
+    }
+    video{
+        width: 100%;
+    }
+  }

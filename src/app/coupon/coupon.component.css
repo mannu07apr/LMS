@@ -1,0 +1,74 @@
+form div {
+    margin-bottom: .1em;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+form input[type="text"],
+form input[type="file"] {
+    width: 100%;
+    padding: 0.3em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 0.5em 1em;
+    background-color: #ff4d00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+#uploaded-list {
+    list-style: none;
+    padding: 0;
+}
+
+#uploaded-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+}
+
+#uploaded-list li button {
+    background-color: #FF0000;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+#uploaded-list li button:hover {
+    background-color: #CC0000;
+}
+
+
+#clear-button{
+    background-color: #80a0a6;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#clear-button:hover{
+    background-color: #0056b3;
+}
+
+  
+  .progress {
+    margin-top: 20px;
+  }
+  .selected-item{
+    color: white;
+    background-color: #7fc9fa;
+}

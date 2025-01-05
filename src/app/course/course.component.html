@@ -1,0 +1,32 @@
+<header style="color:white; font-size: 30px;text-align: center;background-color: rgb(250, 121, 0);">
+  <p  class="font">Let's start learning, {{ loggedinuser }}</p>
+</header>
+
+<div class="mpcontainer">
+  <div class="rightcontainer">
+    <div class="appcontainer">
+      <div class="app-grid">
+        <div class="app-item" *ngFor="let item of coursemasterlist">
+          <div (click)="gotocourse(item.courseName,item.courseID.toString(), item.imageName )">
+            <img class="img" src="/assets/course/{{ item.imageName }}" />
+
+            <div class="app-name">
+              <li>{{item.courseName}} </li>
+            </div>
+
+            <div>{{ item.courseName }} {{item.price | currency:'INR':'symbol':'1.2-2'}}/-</div>
+            <br>
+            <span class="custom-button">View Course</span>
+            
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- /white/ -->

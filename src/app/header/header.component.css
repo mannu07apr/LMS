@@ -1,0 +1,95 @@
+.lmslogo img {
+  width: 120px;
+  border-radius: 10px;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d0d0d0;
+  padding: 10px 10px;
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  justify-content: end;
+}
+
+.navbar .nav-links div a {
+  color: rgb(49, 49, 49);
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 10px;
+  width: 100%;
+}
+
+.mheader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.user-header {
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  display: flex;
+  justify-content: space-between;
+}
+.actionbuttongroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.action_btn {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  background-color: rgb(250, 121, 0);
+  color: #ebebeb;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: scale 0.2 ease;
+  margin-right: 10px;
+}
+
+.action_btn:hover {
+  scale: 1.05;
+  color: #fff;
+}
+
+.action_btn:active {
+  scale: 0.95;
+}
+
+.admin-header {
+  display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 50px;
+}
+@media (max-width: 768px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .navbar .nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .navbar .nav-links div {
+    width: 100%;
+    color: rgb(49, 49, 49);
+    text-decoration: none;
+    font-size: 15px;
+    margin-left: auto;
+    text-align: center;
+  }
+  .admin-header {
+    display: flex;
+    flex-direction: column;
+  }
+}

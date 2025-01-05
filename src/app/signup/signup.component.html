@@ -1,0 +1,119 @@
+<div class="signup-containter">
+  <div class="signup-left">
+    <video class="video-div" controls autoplay>
+      <source src="..//../assets/wellcome.mp4" type="video/mp4" />
+      <source src="movie.ogg" type="video/ogg" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="signup-right">
+    <h2 style="text-align: center;">Registration Forms</h2>
+    <form #signupform="ngForm" (submit)="createuser()">
+      <div class="container">
+        <div class="row p-3">
+          <div class="col-sm">
+            <label for="type" hidden="true">User Type</label>
+          </div>
+          <div class="col-sm" hidden="true">
+            <select [(ngModel)]="userdata.type" name="type">
+              <option value="Student">Student</option>
+              <option value="Free">Free</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm"><label for="userName">Full Name:</label></div>
+          <div class="col-lg">
+            <input [(ngModel)]="userdata.userName" type="text" id="userName" name="userName"
+              placeholder="Enter your Full Name" class="form-control" style="width: 100%" (input)="onNameInput()"
+              #userName="ngModel" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm"><label for="mobile">Mobile:</label></div>
+
+          <div class="col-sm">
+            <!-- <input [(ngModel)]="userdata.mobile" type="text" id="mobile" name="mobile"
+            placeholder="1234567890" pattern="[0-9]{10}" required /> -->
+
+            <input [(ngModel)]="userdata.mobile" type="text" id="mobile" name="mobile" placeholder="1234567890"
+              pattern="[0-9]{10}" required #mobileInput="ngModel" class="form-control" />
+            <div *ngIf="
+                mobileInput.invalid &&
+                (mobileInput.dirty || mobileInput.touched)
+              ">
+              <small class="text-danger" *ngIf="mobileInput.errors?.['required']">Mobile number is required.</small>
+              <small class="text-danger" *ngIf="mobileInput.errors?.['pattern']">Mobile number must be 10
+                digits.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm"><label for="userEmail">Email:</label></div>
+          <!-- <div class="col-sm"> <input [(ngModel)]="userdata.userEmail" type="text" id="userEmail" name="userEmail"
+            placeholder="xyx001@gmail.com" class="form-control" /> -->
+
+          <div class="col-sm">
+            <input [(ngModel)]="userdata.userEmail" type="email" id="userEmail" name="userEmail"
+              placeholder="xyz001@gmail.com" class="form-control" required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #emailInput="ngModel" />
+            <div *ngIf="
+                emailInput.invalid && (emailInput.dirty || emailInput.touched)
+              ">
+              <small class="text-danger" *ngIf="emailInput.errors?.['required']">Email is required.</small>
+              <small class="text-danger" *ngIf="emailInput.errors?.['email']">Please enter a valid email
+                address.</small>
+            </div>
+
+            <div *ngIf="emailInput.errors?.['pattern']">
+              email is not correct format
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm"><label for="password">Password :</label></div>
+          <div class="col-sm">
+            <input [(ngModel)]="userdata.password" type="password" id="password" name="password" placeholder="Password"
+              class="form-control" required #passwordInput="ngModel" />
+            <div *ngIf="
+                passwordInput.invalid &&
+                (passwordInput.dirty || passwordInput.touched)
+              ">
+              <small class="text-danger" *ngIf="passwordInput.errors?.['required']">
+                Valid Password is required.</small>
+            </div>
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col">{{ message }}</div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <input class="custom-button" type="button" (click)="gotologin()" value="User Log in " />
+            </div>
+            <div class="col-6">
+              <input class="custom-button" type="submit" value="Signup" [disabled]="signupform.invalid" />
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <span style="color: brown;font-size: 12px;text-align: center;">Click to enter existing login
+                detail.</span>
+            </div>
+            <div class="col-6">
+              <span style="color: brown;font-size: 12px;text-align: center;"> Enter user detail to create new
+                Login.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+  </div>
+</div>

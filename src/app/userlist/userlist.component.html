@@ -1,0 +1,35 @@
+<a class="btn-sm btn-info" href="adminpanel">Admin Panel</a>
+<p  style="text-align: center;color:white;background-color: red; font-size: large;">{{message}}</p>
+<button (click)="onclick()">Export in excel</button>
+
+<table id="customers">
+    <th>User ID</th>
+    <th>Name</th>
+    <th>email</th>
+    <th>password</th>
+    <th>mobile</th>
+    <th>type</th>
+    <th>Action</th>
+    <th>profile</th>
+    <tbody>
+        <tr  *ngFor="let u of users">   <td>{{u.userId}}</td>
+            <td>{{u.userName}}</td>
+            <td>{{u.userEmail}}</td>
+            <td>{{u.password}}</td>
+            <td>{{u.mobile}}</td>
+            <td>{{u.type}}</td>
+            <td>  <button [ngStyle]="{ 
+                'background-color': u.type === 'Paid' ? 'green' : 'orange', 
+                'color': 'white', 
+                'border': 'none', 
+                'padding': '5px 10px', 
+                'cursor': 'pointer' 
+              }" (click)="onChangeTypeClick(u.userId,u.type)">{{ u.type === 'Paid' ? 'Paid' : 'Free' }}</button></td>
+            <td>
+                <a [routerLink]="['/profile']" [queryParams]="{ userid:u.userId}">Go to Profile</a>
+            </td>
+        </tr>
+       
+    </tbody>
+</table>
+  

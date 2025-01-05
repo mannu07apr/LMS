@@ -1,0 +1,10 @@
+<div class="rating-container">
+    <div>Rate this course</div>
+    <div class="stars">
+        <span *ngFor="let star of stars; let i = index" [ngClass]="{ 'active': i < currentRating }"
+            (click)="rateCourse(i + 1)" (mouseover)="hoverRating(i + 1)" (mouseleave)="hoverRating(0)">
+            ★
+        </span>
+    </div>
+    <p *ngIf="currentRating > 0">You rated this course: {{ currentRating }} star(s)</p>
+</div>

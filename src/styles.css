@@ -1,0 +1,74 @@
+
+
+/* // button use in login sign up view course  next previous  // */
+.custom-button {
+    background-color: #00b1ed;
+    /* Blue background color */
+    color: white;
+    /* White text color */
+    border: none;
+    /* Remove border */
+    padding: 10px 20px;
+    /* Padding */
+    font-size: 16px;
+    /* Font size */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+}
+
+.custom-button:hover {
+    background-color: #979797;
+    /* Darker blue on hover */
+}
+
+.custom-button:disabled {
+    background-color: #c2c2c2;
+    /* Gray background when disabled */
+    cursor: not-allowed;
+    /* Not-allowed cursor when disabled */
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+/* //up batton css jo ki use nahi aa rahi hai // */
+
+
+
+.back-button {
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+    color: rgb(246, 250, 255);
+    display: block;
+    background-color: #0f5fcf;
+    width: 160px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.back-button:hover{
+    text-decoration: none;
+    background-color:  #b312f8;;
+    color: rgb(246, 250, 255);
+}
+
+.custom-button-sm {
+    background-color: #00b1ed;
+    /* Blue background color */
+    color: white;
+    /* White text color */
+    border: none;
+    /* Remove border */
+    padding: 5px 5px;
+    /* Padding */
+    font-size: 14px;
+    /* Font size */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+}

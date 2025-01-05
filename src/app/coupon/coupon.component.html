@@ -1,0 +1,103 @@
+<header class="container">
+  <h1>Create Coupon</h1>
+</header>
+<hr>
+<main class="container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- <div class="col-sm">
+        <div>
+          <label for="couponId" hidden>Coupon ID</label>
+          <input id="couponId" [(ngModel)]="coupon.couponId" name="couponId" type="number" hidden>
+        </div>
+      </div> -->
+      <div class="col-sm">
+        <div>
+          <label for="couponCode">Coupon Code</label>
+          <input id="couponCode" [(ngModel)]="coupon.couponCode" name="couponCode" type="text" required>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div>
+          <label for="amount">Amount</label>
+          <input id="amount" [(ngModel)]="coupon.amount" name="amount" type="number" min="0" required>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div>
+          <label for="startDate">Start Date</label>
+          <input id="startDate" [(ngModel)]="coupon.startDate  " name="startDate" type="date" required>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div>
+          <label for="endDate">End Date</label>
+          <input id="endDate" [(ngModel)]="coupon.endDate" name="endDate" type="date" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        {{message}}
+        <!-- 
+        <div>
+          <label for="membershipID">Membership ID</label>
+          <input id="membershipID" [(ngModel)]="coupon.membershipID" name="membershipID" type="number" >
+        </div> -->
+
+      </div>
+
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</main>
+<section id="Course-Content-List">
+  <h2>Coupons</h2>
+  <div class="row" style="background-color: darkslategray;color: white;">
+    <div class="col-sm">
+      Coupon Code
+    </div>
+    <div class="col-sm">
+      Amount
+    </div>
+    <div class="col-sm">
+      Active
+    </div>
+    <div class="col-sm">
+      Start Date
+    </div>
+    <div class="col-sm">
+      End Date
+    </div>
+    <div class="col-sm">
+      Edit
+    </div>
+  </div>
+  <div *ngFor="let coup of coupons">
+    <div class="row">
+      <div class="col-sm">
+        {{coup.couponCode}}
+      </div>
+      <div class="col-sm">
+        {{coup.amount}}
+      </div>
+      <div class="col-sm">
+        {{coup.active}}
+      </div>
+      <div class="col-sm">
+        {{coup.startDate | date:'dd-MMM-y ' }}
+      </div>
+      <div class="col-sm">
+        {{coup.endDate| date:'dd-MMM-y'}}
+      </div>
+      <div class="col-sm">
+        Deactivate
+      </div>
+    </div>
+  </div>
+</section>

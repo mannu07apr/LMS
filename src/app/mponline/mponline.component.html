@@ -1,0 +1,33 @@
+<div class="mpcontainer">
+  <div class="leftcontainer">
+    <app-sitebar> </app-sitebar>
+  </div>
+
+  <div class="rightcontainer">
+    <div class="appcontainer">
+      <div class="app-grid">
+        <div *ngFor="let s of listofstudent">
+          <p> name of student {{ s.studentname }}, age of Students {{ s.age }},Balance fee = {{ s.totalFee }}</p>
+        
+        </div>
+
+        <div class="app-item" *ngFor="let item of servicesicon">
+          <div>
+            <img class="img" src="/assets/mponline/{{ item.icon }}.jpeg" />
+            <div class="app-name">{{ item.icon }}</div>
+            <div>{{ item.desc }}</div>
+          </div>
+          <div class="temp">
+            <div class="left">left</div>
+            <div class="right">
+              <a href="/assets/mponline/{{ item.file }}" target="_blank">
+                Open
+              </a>
+            </div>
+            <div class="center">center</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+
+<body>
+    <div class="container">
+        <div class="video-container">
+            <video id="videoPlayer" controls>
+                <source src="..//../assets/webinar_intro.mp4"type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-controls">
+                <button id="backwardButton">Backward</button>
+                <button id="forwardButton">Forward</button>
+                <button id="nextButton">Next</button>
+            </div>
+        </div>
+        <div class="course-list">
+            <h2>Course Titles</h2>
+            <ul id="courseTitles">
+                <li onclick="loadVideo('//../assets/webinar_intro.mp4')" >Course 1</li>
+                <li onclick="loadVideo('video2.mp4')">Course 2</li>
+                <li onclick="loadVideo('video3.mp4')">Course 3</li>
+                <!-- Add more courses as needed -->
+            </ul>
+        </div>
+    </div>
+   

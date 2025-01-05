@@ -1,0 +1,117 @@
+
+.card-container {
+    margin-top: 50px;
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
+.card {
+    /* width: 250px;
+    height: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: white; */
+    width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* color: white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+
+.silver {
+    background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+    border:3px dashed red;
+}
+
+.gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.diamond {
+    background: linear-gradient(135deg, #b9f2ff, #00aaff);
+}
+
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.card-content {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.card-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: auto;
+}
+.join{
+    background-color: rgb(230, 7, 7);
+    color: white;
+}
+.card-button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.recommended-label {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FF4500;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.badgenew {
+    width: 60px;
+    height: 60px;
+     position: relative;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: 2px solid white;
+  background-color: white;
+}
+@media only screen and (max-width: 600px) {
+ 
+    .card-container{
+        margin-top: 50px;
+        width: 90%;
+        margin-top: 50px;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap:20px;
+    }
+    .app-button {
+        margin-bottom: 20px;
+    }
+  }
+  @media only screen and (max-width: 820px) {
+    
+  }

@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="lmslogo"> <img src="/assets/lms_logo.jpg" alt="Excelonline" /> </div>
+  <div class="nav-links" id="nav-links">
+    <div><a href="membershipcard">Home</a></div>
+    <div><a href="about">About</a></div>
+    <div><a href="contact">Contact</a></div>
+    <div><a href="signup">Join Free Course</a></div>
+    <div><a href="landingpage">landingpage</a></div>
+
+  </div>
+  <div>
+    <div class="actionbuttongroup">
+      <div (click)="Joinwhatsapp()" class="action_btn">Join Whatsapp Group</div>
+
+      <div *ngIf="!islogged" (click)="login()" class="action_btn">
+        {{ buttontext }}
+      </div>
+      <div *ngIf="islogged" (click)="logout()" class="action_btn">Log out</div>
+    </div>
+
+  </div>
+</nav>

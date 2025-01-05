@@ -1,0 +1,30 @@
+<div class="conh2">
+    <div>
+        <a style="display: block; background-color: black;height: 29px;width: 28px;border-radius: 10px 0 0 0;margin-right: 10px;" href="course">
+            <img width="18px" src="/assets/backarrow.png"></a>
+    </div>
+    <div>
+        {{coursetitle}}
+    </div>
+</div>
+<span class="content-name"> {{contenttext}}</span>
+<div *ngFor="let section of sectionlist ">
+    <div class="section-name"> {{ section }}</div>
+    <div class="video-list">
+        <div *ngFor="let content of courseContents" (click)="setCurrentVideo(content)">
+            <div *ngIf="content.sectionName== section"
+                [ngClass]="content.courseContentID==selectedcontent ? 'content-item-selected' : 'contenttext'">
+                <div class="textleft">
+                    <span class="content-name">{{ content.contentName }}</span>
+                    <br>
+                    <span class="content-time"> {{mediaservice.convertSeconds(content.watchedTime)}}/{{mediaservice.convertSeconds(content.duration)}}</span>
+                </div>
+                <div class="textright">
+                    <img *ngIf="content.watchedTime<=content.duration" width="24px" src="/assets/completed.png">
+                    <img *ngIf="content.watchedTime==0" width="24px" src="/assets/inprogress.png">
+                </div>
+
+            </div>
+        </div>
+        
+    </div>

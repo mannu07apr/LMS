@@ -1,0 +1,65 @@
+<div class="player-container">
+    <div class="signup-left">
+        <!-- <app-video-player [currentVideo]="coursedata"></app-video-player> -->
+        <div class="div-container" (contextmenu)="disableRightClick($event)">
+            <h2 class="conhleft">{{selectedcontentname}}</h2>
+            <div class="video-container" (mouseenter)="showButtons()" (mouseleave)="hideButtons()">
+                <div style="padding:0px;">
+                    <video #videoPlayer id="videoPlayer" preload="auto" controls controlsList="nodownload"
+                        (pause)="onPause($event)" (play)="onPlay($event)">
+                        poster="../../assets/Content Creation Mastery.jpg">
+                        Your browser does not support the video tag.
+                        <source src="../../{{currentVideoSource}}" type="video/mp4">
+                    </video>
+                </div>
+
+                <div>
+                    <button *ngIf="showArrows" (click)="PlayPrevious()" type="button"
+                        class="arrow-button prev">&#9664;</button>
+                    <button *ngIf="showArrows" (click)="PlayNext()" type="button"
+                        class="arrow-button next">&#9654;</button>
+                </div>
+            </div>
+            <button (click)="markAsComplete()"  [ngClass]="{'completed': iscompleted, 'incomplete': !iscompleted}">
+                {{ iscompleted ? 'Mark as Not Completed' : 'Mark as Complete' }}
+            </button>
+        </div>
+    </div>
+
+    <div class="signup-right">
+        <!-- <app-video-playlist (videoSelected)="onVideoSelected($event)"></app-video-playlist> -->
+
+        <div class="conh2">
+            <div>
+                <a style="display: block; background-color: black;height: 30px;width: 28px;border-radius: 10px 0 0 0;margin-right: 10px;"
+                    href="coursecontentlist">
+                    <img width="18px" src="/assets/backarrow.png"></a>
+            </div>
+            <div>
+                {{coursetitle}}
+            </div>
+        </div>
+        <div class="content-total-name"> {{contenttext}}</div>
+        <div *ngFor="let section of sectionlist ">
+            <div class="section-name"> {{ section }}</div>
+            <div class="video-list">
+                <div *ngFor="let content of courseContents let i=index" (click)="changeVideoSource(content.order)">
+                    <div *ngIf="content.sectionName== section"
+                        [ngClass]="content.courseContentID==selectedcontent ? 'content-item-selected' : 'contenttext'">
+                        <div class="textleft">
+                            <span class="content-name">{{ content.order }} - {{ content.contentName }}</span>
+                            <br>
+                            <span class="content-time">
+                                {{mediaservice.convertSeconds(content.watchedTime)}}/{{mediaservice.convertSeconds(content.duration)}}</span>
+                        </div>
+                        <div class="textright">
+                            <img *ngIf="content.completed" width="24px" src="/assets/completed.png">
+                            <img *ngIf="!content.completed" width="24px" src="/assets/inprogress.png">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
