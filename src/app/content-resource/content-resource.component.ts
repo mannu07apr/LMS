@@ -36,16 +36,15 @@ export class ContentResourceComponent implements OnInit {
 
     this.activeTabIndex = index;
     this.GetResourceList(this.currcontentid);
-
     this.courseService.getcontentdetailbyid(userid, contentId)
       .subscribe(
         (data: icoursecontent) => {
           this.courseContents = data;
           this.htmlContent = this.sanitizer.bypassSecurityTrustHtml(this.courseContents.description);
-          console.log(this.courseContents.description);
+          
         }
       );
-    console.log('this.currcontentid ', this.courseContents);
+    console.log('this.currcontentid ', this.courseContents?.courseContentID);
 
   }
 

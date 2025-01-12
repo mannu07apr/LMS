@@ -97,7 +97,8 @@ export class CourseplayerComponent implements OnInit {
       this.startAutoSave();
     }
     this.isExpanded = new Array(this.sectionlist.length).fill(false);
-
+    this.changeVideoSource(1);
+    this.toggleSection(0);
   }
   ngOnDestroy() {
     this.stopAutoSave();
@@ -113,11 +114,10 @@ export class CourseplayerComponent implements OnInit {
     const currentTime = videoPlayer.currentTime;
     // Save the current playback time to localStorage
     localStorage.setItem(this.savedTimeKey, currentTime.toString());
-
     this.progressData.userId = this.userid;
     this.progressData.watchedDuration = Number.parseFloat(currentTime.toString());
     this.progressData.completed = false;
-    console.log(typeof this.progressData.userId);
+    
     this.UpdateProgress(this.userid, this.progressData);
   }
   markAsComplete() {
@@ -217,7 +217,7 @@ export class CourseplayerComponent implements OnInit {
     const currCourse = this.courseContents.find(d => d.order === orderid) as icoursecontent;
     
     if (currCourse) {
-      console.log('Start video' + currCourse.videoFileName);
+      localStorage['contentid']=currCourse.courseContentID;
       this.currentVideoSource = currCourse.videoFileName;
       this.selectedcontentname = currCourse.contentName;
       this.selectedcontent = currCourse.courseContentID;
