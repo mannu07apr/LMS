@@ -65,7 +65,7 @@
 }
 .content-total-name {
   font-size: 14px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: rgb(17, 17, 17);
   padding: 0px 0px;
   margin-top: 5px;
@@ -82,11 +82,17 @@
 
 .content-name {
   font-size: 14px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: rgb(17, 17, 17);
   padding: 1px;
+  cursor: pointer;
 }
 
+.textright:hover{
+  background-color: rgb(170, 170, 170);
+  border-radius: 5px;
+  cursor: pointer;
+}
 .content-time {
   margin-top: -5px;
   font-size: 10px;

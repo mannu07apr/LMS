@@ -89,7 +89,7 @@ export class CoursecontentComponent implements OnInit {
     localStorage.setItem('contenttext', contenttext);
     localStorage.setItem('currentvideofilename', contentfile);
     localStorage.setItem('contentid', contentid.toString());
-    this.router.navigate(['/imgcration']);
+    this.router.navigate(['/courseplayer']);
   }
 
 }

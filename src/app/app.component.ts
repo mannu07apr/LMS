@@ -41,5 +41,17 @@ export class AppComponent implements OnInit {
   isFreeUser():boolean{
     return  this.userType ==='Free';
   }
+  editorContent: string = ''; // This will hold the editor's content
+
+  // Quill editor configuration
+  editorConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline'],        // Basic formatting
+      [{ 'header': [1, 2, 3, false] }],       // Header options
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
+      ['link', 'image', 'blockquote'],        // Links, images, blockquote
+      ['clean']                               // Remove formatting
+    ]
+  };
 }
 

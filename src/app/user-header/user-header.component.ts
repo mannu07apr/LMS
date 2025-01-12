@@ -19,8 +19,7 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
   buttonText: string = 'Login';
   buttonImage: string = '/assets/login.png';
 
-  constructor(private router: Router,
-    
+  constructor(private router: Router,    
     private authService: AuthService
   ) {
     

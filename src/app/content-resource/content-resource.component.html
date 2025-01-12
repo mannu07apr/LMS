@@ -1,0 +1,22 @@
+<div class="tabs-container">
+    <div class="tabs">
+      <div
+        *ngFor="let tab of tabs; let i = index"
+        (click)="activateTab(i)"
+        [class.active]="activeTabIndex === i"
+        class="tab"
+      >
+        {{ tab.label }}
+      </div>
+    </div>
+    <div class="tab-content">
+      <div *ngIf="activeTabIndex === 0" class="content" [innerHTML]="htmlContent"></div>
+      <div *ngIf="activeTabIndex === 1" class="content">
+        <div *ngFor="let resource of resourcelist">
+       <a [href]="resource.fileName" >  {{resource.fileName}}</a>
+        </div>
+
+      </div>
+      <div *ngIf="activeTabIndex === 2" class="content">Q&A Content</div>
+    </div>
+  </div>

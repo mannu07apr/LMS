@@ -4,5 +4,7 @@ export interface icoursemaster {
     imageName: string, 
     type: string, 
     price: number, 
-    createdDate: Date
+    createdDate: Date,
+    description:string,
+    resources:string
 }

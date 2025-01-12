@@ -42,7 +42,8 @@ export class VideoPlaylistComponent {
     totalCourseTime: '',
     totalWatchedTime: '',
     totalProgress: '',
-    progressId: 0
+    progressId: 0,
+    description:''
   };
   courseContents: icoursecontent[] = [];
   sectionlist: string[] = [];

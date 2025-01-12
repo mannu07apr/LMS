@@ -60,12 +60,14 @@ export class ProfileComponent implements OnInit {
   }
 
   GetUserProfile(userid: string) {
+    console.log(userid + "  PRofile ");
     this.userprofileservice.getUserProfile(userid)
       .subscribe(
         (data: IUserProfile) => {
           this.userprofile = data;
           this.isProfileExist = true;
           this.imgURL = '/assets/course/' + this.userprofile.profilePhoto;
+          console.log(data);
         }
       );
 
@@ -86,7 +88,7 @@ export class ProfileComponent implements OnInit {
         );
     }
     else {
-
+      this.userprofile.userid =  localStorage['userid']; 
       this.userprofileservice.createUserProfile(this.userprofile)
         .subscribe(
           (data: IUserProfile) => {

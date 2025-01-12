@@ -30,12 +30,13 @@
   text-align: center;
   background-color: rgb(185, 185, 185);
   color: rgb(17, 17, 17);
-  padding-left: 10px;
+  padding: 5px;
   height: 30px;
   /* margin: -10px -11px 10px -11px;     */
   border-radius: 10px 10px 0 0;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .conh2 {
   font-size: larger;
@@ -74,7 +75,7 @@
 }
 .content-name {
   font-size: 14px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: rgb(17, 17, 17);
   padding: 1px;
 }
@@ -117,7 +118,9 @@
   border-bottom: solid 1px gray;
   margin-bottom: 10px;
 }
-
+.section-name:hover ,.textleft:hover{
+  cursor: pointer;
+}
 .div-container {
   width: 100%;
   display: flex;

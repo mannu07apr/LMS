@@ -14,7 +14,7 @@ import { CourseComponent } from './course/course.component';
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './auth.guard';
 import { AboutComponent } from './about/about.component';
-import { ImgcrationComponent } from './imgcration/imgcration.component';
+import { CourseplayerComponent } from './courseplayer/courseplayer.component';
 import { UploadComponent } from './upload/upload.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
@@ -26,6 +26,8 @@ import { CouponComponent } from './coupon/coupon.component';
 import { UserpanelComponent } from './userpanel/userpanel.component';
 import { NotifierComponent } from './notifier/notifier.component';
 import { CoursecontentComponent } from './coursecontent/coursecontent.component';
+import { FileUploadModalComponent } from './file-upload-modal/file-upload-modal.component';
+import { ContentResourceComponent } from './content-resource/content-resource.component';
 
 
 const routes: Routes = [
@@ -41,7 +43,7 @@ const routes: Routes = [
   { path: 'course', component: CourseComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'imgcration', component: ImgcrationComponent },
+  { path: 'courseplayer', component: CourseplayerComponent },
   { path: 'upload', component: UploadComponent },
   { path: 'adminpanel', component: AdminpanelComponent },
   { path: 'landingpage', component: LandingpageComponent },
@@ -54,7 +56,9 @@ const routes: Routes = [
   { path: 'coupon', component: CouponComponent },
   { path: 'userpanel', component: UserpanelComponent },
   { path: 'coursecontentlist', component: CoursecontentComponent },
-  { path: 'toastr', component: NotifierComponent }
+  { path: 'toastr', component: NotifierComponent },
+  { path: 'fileupload', component: FileUploadModalComponent },
+  { path: 'contentresource', component: ContentResourceComponent },
 
 ];
 

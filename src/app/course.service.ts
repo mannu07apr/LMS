@@ -22,6 +22,8 @@ private ProgressDetailsrurl: string = '/api/UsersProgress/GetUserProgress';
 private ProgressUpdateurl: string = '/api/UsersProgress';
 private coursecontentbyidurl: string = '/api/CourseContent/CourseContentByID';
 private createcoursemasternurl: string = '/api/CourseMaster/Create';
+private editcoursemasternurl: string = '/api/CourseMaster/Edit';
+private contentdetailurl: string = '/api/CourseContent/Details';
 // private DevApiUrl: string = "http://localhost/";
 //private ProdApiUrl: string = "http://localhost:5555";
  private ProdApiUrl: string = "http://learn.excelonlineservices.com";
@@ -40,6 +42,10 @@ private createcoursemasternurl: string = '/api/CourseMaster/Create';
     let productObservale = this.http.post<icoursemaster>(this.ProdApiUrl+this.createcoursemasternurl,newproduct);
     return productObservale.pipe(catchError(error => of<icoursemaster>()));
   }
+  editcoursemaster(newproduct :  icoursemaster){
+    let productObservale = this.http.post<icoursemaster>(this.ProdApiUrl+this.editcoursemasternurl,newproduct);
+    return productObservale.pipe(catchError(error => of<icoursemaster>()));
+  }
 
   deleteCourse(courseID: number): Observable<any> {
     const url =this.ProdApiUrl+this.coursemasterurl+"/Delete?id="+courseID;
@@ -54,6 +60,12 @@ private createcoursemasternurl: string = '/api/CourseMaster/Create';
     let courselist = this.http.get<icoursecontent[]>(this.ProdApiUrl+this.coursecontentbyidurl+"?userId="+userID+"&courseId="+courseID);
     return courselist.pipe(catchError((error) => of<icoursecontent[]>([])));
   }
+  getcontentdetailbyid(userID:number, contentID: number): Observable<icoursecontent> {
+    let courselist = this.http.get<icoursecontent>(this.ProdApiUrl+this.contentdetailurl+"?coursecontentid="+contentID);
+    return courselist.pipe(catchError((error) => of<icoursecontent>()));
+  }
+
+
   getUserProgressbyid(userID:number, courseID: number): Observable<iUserProgress[]> {
     let courselist = this.http.get<iUserProgress[]>(this.ProdApiUrl+this.ProgressDetailsrurl+"?userid="+userID+"&courseid="+courseID);
     return courselist.pipe(catchError((error) => of<iUserProgress[]>([])));

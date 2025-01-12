@@ -16,4 +16,5 @@ watchedTime: number;
 totalCourseTime: string ;
 totalWatchedTime: string ;
 totalProgress: string ;
+description:string;
 }

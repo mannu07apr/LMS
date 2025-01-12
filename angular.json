@@ -26,23 +26,20 @@
             "outputPath": "dist/myapp",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
-              
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/datatables.net/js/dataTables.min.js"
-            ]
+            ],
+            "allowedCommonJsDependencies": ["quill"]
           },
           "configurations": {
             "production": {
@@ -89,19 +86,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css", "node_modules/ngx-toastr/toastr.css"],
             "scripts": []
           }
         }

@@ -34,7 +34,7 @@ export class CourseComponent implements OnInit {
     localStorage['thumbimg'] = imgnmae;
     this.router.navigate(['/coursecontentlist']);
 
- //   this.router.navigate(['/imgcration']);
+ //   this.router.navigate(['/courseplayer']);
   }
 
   ngOnInit(): void {

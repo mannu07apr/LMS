@@ -1,14 +1,13 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { icoursecontent } from '../../assets/model/icoursecontent';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CourseService } from '../course.service';
 import { ImageUploadService } from '../image-upload.service';
-import { DataTablesModule } from 'angular-datatables';
-import DataTables from 'datatables.net';
-import { Subject, takeUntil } from 'rxjs';
 import { MediaService } from '../media.service';
 import { NotifierService } from '../notifier.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FileUploadModalComponent } from '../file-upload-modal/file-upload-modal.component';
 
 @Component({
   selector: 'app-addcoursecontent',
@@ -50,29 +49,47 @@ export class AddcoursecontentComponent implements OnInit {
     totalCourseTime: '',
     totalWatchedTime: '',
     totalProgress: '',
-    progressId: 0
+    progressId: 0,
+    description:''
   };
   courseContents: icoursecontent[] = [];
   selectedItem: icoursecontent | null = null;
   ccoursedata: icoursecontent | undefined;
 
-  constructor(private http: HttpClient, private router: Router, private imageUploadService: ImageUploadService,
-    private courseService: CourseService, public mediaService: MediaService, private notifyservice: NotifierService) {
+  constructor(private http: HttpClient,
+    private router: Router,
+    private imageUploadService: ImageUploadService,
+    private courseService: CourseService,
+    public mediaService: MediaService,
+    private notifyservice: NotifierService,
+    private dialog: MatDialog) {
     this.images = '';
 
   }
+  editorContent: string = ''; // This will hold the editor's content
 
+  // Quill editor configuration
+  editorConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline'],        // Basic formatting
+      [{ 'header': [1, 2, 3, false] }],       // Header options
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
+      ['link', 'image', 'blockquote'],        // Links, images, blockquote
+      ['clean']                               // Remove formatting
+    ]
+  };
   ngOnInit(): void {
     this.selectedcourse = localStorage['coursetitle'];
     this.courseid = localStorage['courseid'];
     this.userid = localStorage['userid'];
     this.coursedata.courseID = this.courseid;
-    this.coursedata.order = 1;
+    
     this.GetCourseList();
+
   }
 
   DeleteCourseContent(ccntid: number) {
-    
+
     this.courseService.deleteCourseContent(ccntid).subscribe(() => {
       this.courseContents = this.courseContents.filter(course => course.courseID !== ccntid);
       this.GetCourseList();
@@ -92,14 +109,16 @@ export class AddcoursecontentComponent implements OnInit {
     this.courseService.getcourscontentbyid(this.userid, this.courseid)
       .subscribe(
         (data: icoursecontent[]) => {
-          this.courseContents = data.sort((a, b) => a.order - b.order);
-
+          this.courseContents = data;
+          const maxOrder = Math.max( ...this.courseContents.map(content => content.order));
+          this.coursedata.order = maxOrder+1;
+          console.log(this.courseContents);
         }
       );
   }
 
   CreatCourseContent() {
-    
+
     //update existing content
     if (this.btntext == 'Update Content' && this.coursedata.contentName != "" && this.coursedata.sectionName != "") {
       if (!(this.selectedfiles)) {
@@ -250,10 +269,24 @@ export class AddcoursecontentComponent implements OnInit {
       totalCourseTime: '',
       totalWatchedTime: '',
       totalProgress: '',
-      progressId: 0
+      progressId: 0,
+      description:''
     };
     this.btntext = 'Add Content';
     this.selectedItem = null;
   }
+  openFileUploadModal(contentDetail: icoursecontent): void {
+    const dialogRef = this.dialog.open(FileUploadModalComponent, {
+      width: '600px',
+      data: { contentdetail: contentDetail }
+    });
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('File uploaded for :', contentDetail, ' : ', result);
+      } else {
+        console.log('File upload cancelled');
+      }
+    });
+  }
 }

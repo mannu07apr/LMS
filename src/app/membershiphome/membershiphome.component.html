@@ -16,7 +16,7 @@
             - Email support
         </div>
         <button class="card-button join">Join Now</button>
-        Get Discount {{coupon.amount}} with Coupon {{coupon.couponCode}}
+      <div *ngIf="coupon.amount>0">  Get Discount {{coupon.amount}} with Coupon {{coupon.couponCode}}</div>
     </div>
 
     <!-- Gold Membership Card -->

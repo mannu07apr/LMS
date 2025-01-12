@@ -1,21 +1,20 @@
 <header class="container">
     <h1>Upload Course</h1>
-    <a class="btn-sm btn-info" href="adminpanel">Admin Panel</a>
 </header>
 <hr>
 <main class="container">
     <section id="upload-section">
-        <h2>Add Course</h2>
+        <h2>Course Detail</h2>
         <form #signupform="ngForm" (submit)="CreatCourseMaster()">
             <div class="row">
                 <div class="col">
                     <label for="courseName">Course Name:</label>
-                    <input [(ngModel)]="coursedata.courseName" type="text" id="courseName" name="courseName" required  appFocus
-                    #nameInput>
+                    <input class="form-control" [(ngModel)]="coursedata.courseName" type="text" id="courseName"
+                        name="courseName" required appFocus #nameInput>
                 </div>
                 <div class="col">
                     <label for="type">Type:</label>
-                    <select id="typelsit" name="type" [(ngModel)]="coursedata.type">
+                    <select id="typelsit" class="form-control" name="type" [(ngModel)]="coursedata.type">
                         <option value="Bronze">Bronze</option>
                         <option value="Silver">Silver</option>
                         <option value="Gold">Gold</option>
@@ -25,23 +24,37 @@
                 </div>
                 <div class="col">
                     <label for="type">Price:</label>
-                    <input [(ngModel)]="coursedata.price" type="text" id="price" name="price" required>
+                    <input class="form-control" [(ngModel)]="coursedata.price" type="text" id="price" name="price"
+                        required>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <label for="imageName">Image :</label>
-                    <input class="form-control" required type="file" id="file" (change)="onChange($event)"
-                        accept=".jpg,.jpeg,.bmp">
+                    <label for="courseName">Description</label>
+                    <input class="form-control" [(ngModel)]="coursedata.description" type="text" id="description"
+                        name="description" required appFocus #nameInput>
                 </div>
-                <div class="col">
+              
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="imageName">Image :</label>
+                    <input class="form-control" required type="file" id="file"
+                        (change)="onChange($event)" accept=".jpg,.jpeg,.bmp">
+                </div>
+                <div class="col-6">
                     <label>{{ message }}</label>
                     <br>
-                    <input class="btn-sm custom-button" style="height: 40px;" type="submit" value="Upload" />
+                    <input class="btn-sm custom-button" style="height: 40px; margin-top: 10px;" type="submit"
+                        value="Upload" />
                 </div>
+               
             </div>
             <div class="field">
                 <img *ngFor="let file of imgURL" width="50" src="{{file}}">
+
             </div>
         </form>
     </section>
@@ -51,16 +64,17 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Course ID</th>
-                    <th>Course Name</th>
+                    <th>ID</th>
+                    <th>Course</th>
                     <th>Image</th>
                     <th>Type</th>
                     <th>Price</th>
                     <th>Created Date</th>
-                    <th>Add Content</th>
-                    <th>View Content</th>
+                    <th>Add </th>
+                    <th>Edit </th>
+                    <th>View </th>
                     <th>Delete</th>
-
+                    <!-- <th>Add Resource</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -72,15 +86,29 @@
                     <td>{{ course.price | currency:'INR':'symbol':'1.2-2' }}</td>
                     <td>{{ course.createdDate | date:'mediumDate' }}</td>
                     <td>
-                        <button (click)="AddCourseContent(course.courseName,course.courseID)" class="btn btn-link">Add
-                            Content</button>
+                        <button (click)="AddCourseContent(course.courseName,course.courseID)" class="custom-button-img">
+                            <img src="assets/addvideo.png" alt="Button" width="24px" />
+                        </button>
                     </td>
                     <td>
-                        <button (click)="ViewourseContent(course.courseID)" class="btn btn-link">View Content</button>
+                        <button (click)="SelectCourse(course)" class="custom-button-img">
+                            <img src="assets/edit.png" alt="Button" width="24px" />
+                        </button>
                     </td>
                     <td>
-                        <button (click)="deleteCourse(course.courseID)" class="btn btn-link">Delete</button>
+                        <button (click)="ViewourseContent(course.courseID)" class="custom-button-img">
+                            <img src="assets/view.png" alt="Button" width="24px" />
+                        </button>
                     </td>
+                    <td> <button (click)="deleteCourse(course.courseID)" class="custom-button-img">
+                            <img src="assets/delete.png" alt="Button" width="24px" />
+                        </button>
+                    </td>
+
+                    <!-- <td> <button (click)="openFileUploadModal(course)" class="custom-button-img">
+                            <img src="assets/upload_file.png" alt="Button" width="24px" />
+                        </button>
+                    </td> -->
                 </tr>
             </tbody>
         </table>

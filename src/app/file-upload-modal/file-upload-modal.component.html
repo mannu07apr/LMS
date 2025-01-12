@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Upload Resource for {{contentdetail.contentName}}</h2>
+<mat-dialog-content>
+    <p>Select files to upload:</p>
+    <input type="file" multiple
+        accept=".pdf,.doc,.docx,.txt,.ppt,.pptx,.xls,.xlsx,.rtf,.jpg,.jpeg,.png,.gif,.svg,.bmp,.tiff,.mp3,.wav,.aac,.m4a,.ogg,.mp4,.webm,.avi,.mov,.mkv,.zip,.rar,.7z,.tar.gz,.html,.css,.js,.py,.java,.c,.cpp,.h,.json,.xml,.sql,.epub,.mobi"
+        (change)="onFilesSelected($event)" />
+
+    <div *ngIf="selectedFiles.length > 0">
+        <h3>Selected Files:</h3>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Filew</th>
+                    <th>View</th>
+                    <th>Remove</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let file of selectedFiles; index as i">
+                    <td>
+                        {{ file.name }}
+                    </td>
+                    <td> <button class="custom-button-img" (click)="viewFile(file)"> <img src="assets/view.png"
+                                alt="Button" width="18px" /></button></td>
+                    <td><button class="custom-button-img" (click)="removeFile(i)"> <img src="assets/delete.png"
+                                alt="Button" width="18px" /></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="progress" *ngIf="progress > 0">
+        <div class="progress-bar" role="progressbar" [style.width.%]="progress"
+            [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">{{ progress }}%</div>
+    </div>
+    <button mat-button (click)="onClose()">Cancel</button>
+    <button mat-button color="primary" [disabled]="selectedFiles.length === 0" (click)="onUpload()">
+        Upload
+    </button>
+</mat-dialog-actions>

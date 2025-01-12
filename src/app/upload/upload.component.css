@@ -1,4 +1,24 @@
 
+
+h2{
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 5px;
+    background-color: rgb(166, 166, 166);
+    border-radius: 5px;
+}
+.container{
+    margin-top: 10px;
+    
+}
+label{
+    font-weight: bold;
+}
+section{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 5px;
+}
 #uploaded-list {
     list-style: none;
     padding: 0;
@@ -24,7 +44,4 @@
 
 #uploaded-list li button:hover {
     background-color: #CC0000;
-}
-h2{
-    font-size: 20px;
 }

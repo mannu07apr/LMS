@@ -24,6 +24,12 @@
                 {{ iscompleted ? 'Mark as Not Completed' : 'Mark as Complete' }}
             </button>
         </div>
+        
+        <div class="row">
+            <div class="col"> 
+                <app-content-resource></app-content-resource>
+            </div>
+        </div>
     </div>
 
     <div class="signup-right">
@@ -40,26 +46,36 @@
             </div>
         </div>
         <div class="content-total-name"> {{contenttext}}</div>
-        <div *ngFor="let section of sectionlist ">
-            <div class="section-name"> {{ section }}</div>
-            <div class="video-list">
-                <div *ngFor="let content of courseContents let i=index" (click)="changeVideoSource(content.order)">
-                    <div *ngIf="content.sectionName== section"
-                        [ngClass]="content.courseContentID==selectedcontent ? 'content-item-selected' : 'contenttext'">
-                        <div class="textleft">
-                            <span class="content-name">{{ content.order }} - {{ content.contentName }}</span>
-                            <br>
-                            <span class="content-time">
-                                {{mediaservice.convertSeconds(content.watchedTime)}}/{{mediaservice.convertSeconds(content.duration)}}</span>
-                        </div>
-                        <div class="textright">
-                            <img *ngIf="content.completed" width="24px" src="/assets/completed.png">
-                            <img *ngIf="!content.completed" width="24px" src="/assets/inprogress.png">
-                        </div>
-
-                    </div>
-                </div>
-
+    
+        <div *ngFor="let section of sectionlist; let sectionIndex = index">
+            <!-- Section Header -->
+            <div class="section-name" (click)="toggleSection(sectionIndex)">
+              {{ section }}
+              <span>
+                <!-- Toggle Indicator (e.g., arrow or text) -->
+                {{ isExpanded[sectionIndex] ? '▼' : '▶' }}
+              </span>
             </div>
-        </div>
+            
+            <!-- Video List -->
+            <div class="video-list" *ngIf="isExpanded[sectionIndex]">
+              <div *ngFor="let content of courseContents; let i = index" (click)="changeVideoSource(content.order)">
+                <div *ngIf="content.sectionName == section"
+                     [ngClass]="content.courseContentID == selectedcontent ? 'content-item-selected' : 'contenttext'">
+                  <div class="textleft">
+                    <span class="content-name">{{ content.order }} - {{ content.contentName }}</span>
+                    <br>
+                    <span class="content-time">
+                      {{ mediaservice.convertSeconds(content.watchedTime) }}/{{ mediaservice.convertSeconds(content.duration) }}
+                    </span>
+                  </div>
+                  <div class="textright">
+                    <img *ngIf="content.completed" width="24px" src="/assets/completed.png">
+                    <img *ngIf="!content.completed" width="24px" src="/assets/inprogress.png">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
     </div>

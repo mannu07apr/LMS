@@ -1,6 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,7 @@ import { TempComponent } from './temp/temp.component';
 import { CourseComponent } from './course/course.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
-import { ImgcrationComponent } from './imgcration/imgcration.component';
+import { CourseplayerComponent } from './courseplayer/courseplayer.component';
 import { UploadComponent } from './upload/upload.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
@@ -42,6 +41,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CoursecontentComponent } from './coursecontent/coursecontent.component';
 import { ProgressBarComponentComponent } from './progress-bar-component/progress-bar-component.component';
 import { RateThisCourseComponent } from './rate-this-course/rate-this-course.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FileUploadModalComponent } from './file-upload-modal/file-upload-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ContentResourceComponent } from './content-resource/content-resource.component';
+import { QuillModule } from 'ngx-quill';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +68,7 @@ import { RateThisCourseComponent } from './rate-this-course/rate-this-course.com
     CourseComponent,
     LoginComponent,
     AboutComponent,
-    ImgcrationComponent,
+    CourseplayerComponent,
     UploadComponent,
     AdminpanelComponent,
     LandingpageComponent,
@@ -78,7 +85,9 @@ import { RateThisCourseComponent } from './rate-this-course/rate-this-course.com
     NotifierComponent,
     CoursecontentComponent,
     ProgressBarComponentComponent,
-    RateThisCourseComponent
+    RateThisCourseComponent,
+    FileUploadModalComponent,
+    ContentResourceComponent
   ],
   imports: [
     FormsModule,
@@ -86,6 +95,10 @@ import { RateThisCourseComponent } from './rate-this-course/rate-this-course.com
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,  
+    QuillModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: "toast-center-center",
       preventDuplicates: true,
@@ -94,7 +107,7 @@ import { RateThisCourseComponent } from './rate-this-course/rate-this-course.com
       easeTime :1000
     })
   ],
-  providers: [MediaService, { provide: LOCALE_ID, useValue: 'en-IN' }],
+  providers: [MediaService, { provide: LOCALE_ID, useValue: 'en-IN' }, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
