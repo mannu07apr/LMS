@@ -1,4 +1,4 @@
-import {  Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { icoursecontent } from '../../assets/model/icoursecontent';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -50,7 +50,7 @@ export class AddcoursecontentComponent implements OnInit {
     totalWatchedTime: '',
     totalProgress: '',
     progressId: 0,
-    description:''
+    description: ''
   };
   courseContents: icoursecontent[] = [];
   selectedItem: icoursecontent | null = null;
@@ -83,7 +83,7 @@ export class AddcoursecontentComponent implements OnInit {
     this.courseid = localStorage['courseid'];
     this.userid = localStorage['userid'];
     this.coursedata.courseID = this.courseid;
-    
+
     this.GetCourseList();
 
   }
@@ -101,6 +101,7 @@ export class AddcoursecontentComponent implements OnInit {
     this.ccoursedata = this.courseContents.find(x => x.courseContentID == arg0);
     this.coursedata = this.ccoursedata as icoursecontent;
     this.btntext = 'Update Content';
+    
     this.selectedItem = this.coursedata;
     this.videoDuration = this.coursedata.duration;
   }
@@ -110,8 +111,8 @@ export class AddcoursecontentComponent implements OnInit {
       .subscribe(
         (data: icoursecontent[]) => {
           this.courseContents = data;
-          const maxOrder = Math.max( ...this.courseContents.map(content => content.order));
-          this.coursedata.order = maxOrder+1;
+          const maxOrder = Math.max(...this.courseContents.map(content => content.order));
+          this.coursedata.order = maxOrder + 1;
           console.log(this.courseContents);
         }
       );
@@ -121,33 +122,21 @@ export class AddcoursecontentComponent implements OnInit {
 
     //update existing content
     if (this.btntext == 'Update Content' && this.coursedata.contentName != "" && this.coursedata.sectionName != "") {
-      if (!(this.selectedfiles)) {
-        this.message = 'Select video for content';
-        this.notifyservice.ShowError("Upload", this.message);
-      }
-      else {
-        this.courseService.updtaecoursecontent(this.coursedata.courseContentID, this.coursedata)
-          .subscribe(
-            (data: icoursecontent) => {
-              this.uploaded = true;
-              if (this.selectedfiles) {
-                this.upload();
-              }
-              else if (!(this.selectedfiles)) {
-                this.message = 'Select video for content';
-                this.notifyservice.ShowError("Upload", this.message);
-              }
-              else {
-                this.uploaded = false;
-                this.progress = 0;
-                if (!this.uploaded) {
-                  this.message = 'Content updated';
-                  this.notifyservice.ShowSuccess("Upload", this.message);
-                }
-              }
+
+      this.courseService.updtaecoursecontent(this.coursedata.courseContentID, this.coursedata)
+        .subscribe(
+          (data: icoursecontent) => {
+
+            this.uploaded = false;
+            this.progress = 0;
+            if (!this.uploaded) {
+              this.message = 'Content updated';
+              this.notifyservice.ShowSuccess("Upload", this.message);
             }
-          );
-      }
+
+          }
+        );
+
     }
     /// add new content
     else {
@@ -270,7 +259,7 @@ export class AddcoursecontentComponent implements OnInit {
       totalWatchedTime: '',
       totalProgress: '',
       progressId: 0,
-      description:''
+      description: ''
     };
     this.btntext = 'Add Content';
     this.selectedItem = null;

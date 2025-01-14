@@ -13,7 +13,7 @@
       <div *ngIf="activeTabIndex === 0" class="content" [innerHTML]="htmlContent"></div>
       <div *ngIf="activeTabIndex === 1" class="content">
         <div *ngFor="let resource of resourcelist">
-       <a [href]="resource.fileName" >  {{resource.fileName}}</a>
+       <a [href]="resource.filePath" > {{resource.fileName}}</a>
         </div>
 
       </div>

@@ -49,7 +49,7 @@ export class CourseplayerComponent implements OnInit {
     totalWatchedTime: '',
     totalProgress: '',
     progressId: 0,
-    description:''
+    description: ''
   };
   progressData: iUpdateProgress = {
     progressId: 0,
@@ -69,13 +69,15 @@ export class CourseplayerComponent implements OnInit {
   iscompleted: boolean = false;
   resourcelist: iresource[] = [];
   isExpanded: boolean[] = [];
+  sectionname: string = '';
+
   private intervalId: any;
 
-  constructor(private http: HttpClient, 
-    private router: Router, 
+  constructor(private http: HttpClient,
+    private router: Router,
     private imageUploadService: ImageUploadService,
     private courseService: CourseService,
-     public mediaservice: MediaService) {
+    public mediaservice: MediaService) {
 
   }
 
@@ -87,18 +89,22 @@ export class CourseplayerComponent implements OnInit {
     this.coursetitle = localStorage['coursetitle'];
     this.islogged = localStorage['islogged'] == 'true';
     this.userType = localStorage['usertype'];
+    this.selectedOrder = localStorage['selectedOrder'];
+    this.sectionname = localStorage['sectionname'];
 
     if (this.loggedinuser == null) {
       this.router.navigate(['/signup']);
     }
     else {
-
       this.GetCourseList(this.userid, this.courseid);
-      this.startAutoSave();
+        this.startAutoSave();
     }
-    this.isExpanded = new Array(this.sectionlist.length).fill(false);
-    this.changeVideoSource(1);
-    this.toggleSection(0);
+
+       //this.toggleSection(1);
+    // Add ended event listener
+
+    const videoElement = this.videoPlayer.nativeElement;
+    videoElement.addEventListener('ended', () => this.PlayNext());
   }
   ngOnDestroy() {
     this.stopAutoSave();
@@ -117,19 +123,25 @@ export class CourseplayerComponent implements OnInit {
     this.progressData.userId = this.userid;
     this.progressData.watchedDuration = Number.parseFloat(currentTime.toString());
     this.progressData.completed = false;
-    
+
     this.UpdateProgress(this.userid, this.progressData);
   }
   markAsComplete() {
 
+    const currentContent = this.courseContents.find(content => content.courseContentID === this.selectedcontent);
+    if (currentContent) {
+      // Update the `completed` status
+      currentContent.completed = true;
+    }
     this.progressData.userId = this.userid;
     this.progressData.completed = !this.iscompleted;
     this.progressData.watchedDuration = !this.iscompleted ? Number.parseFloat(this.totalTime?.toString() || '0') : 0.00;
     this.UpdateProgress(this.userid, this.progressData);
 
   }
+
   onPlay(event: Event): void {
-    console.log('Video is playing');
+    
   }
 
 
@@ -142,7 +154,7 @@ export class CourseplayerComponent implements OnInit {
       );
   }
   onVideoSelected(video: icoursecontent) {
-    
+
     this.coursedata = video;
   }
   convertBytesToMB(bytes: number): string {
@@ -155,22 +167,34 @@ export class CourseplayerComponent implements OnInit {
       .subscribe(
         (data: icoursecontent[]) => {
           this.courseContents = data.filter(d => d.courseID == courseid);
+          if (this.courseContents.length === 0) {
+            console.warn('No matching course content found.');
+            return;
+          }
           this.sectionlist = this.courseContents.map(item => item.sectionName)
             .filter((__values, index, self) => self.indexOf(__values) === index);
-          this.contenttext = 'Total Sections : ' + this.sectionlist.length.toString() + ' Total Lessons : ' + this.courseContents.length.toString();
+
+          this.contenttext = 'Total Sections : ' + this.sectionlist.length.toString() +
+            ' Total Lessons : ' + this.courseContents.length.toString();
+
           const toaltime = this.courseContents.reduce((sum, item) => sum + item.duration, 0);
           this.contenttext += ' Total Time : ' + this.mediaservice.convertSeconds(toaltime);
+          // Autoplay the first video (assuming order starts from 1)
+          if (this.selectedOrder > 1) {
 
+            this.changeVideoSource(this.selectedOrder);
+          }
+          else {
+            const firstOrder = Math.min(...this.courseContents.map(content => content.order));
+            this.changeVideoSource(firstOrder);
+          }
+          this.expandSectionForCurrentContent(this.sectionname);
+        },
+        (error) => {
+          console.error('Error fetching course content:', error);
         }
       );
 
-    if (this.courseContents.length > 0) {
-      this.minOrder = Math.min(...this.courseContents.map(content => content.order));
-      this.changeVideoSource( this.minOrder );
-    }
-    else {
-
-    }
   }
   PlayPrevious() {
 
@@ -183,16 +207,17 @@ export class CourseplayerComponent implements OnInit {
     this.changeVideoSource(this.selectedOrder);
 
   }
-  PlayNext() {
+  PlayNext(): void {
+
+    
+    this.markAsComplete();
     this.maxOrder = Math.max(...this.courseContents.map(content => content.order));
-    if (this.selectedOrder >= this.maxOrder) {
-      this.selectedOrder = this.maxOrder;
-    } else {
+    if (this.selectedOrder < this.maxOrder) {
       this.selectedOrder++;
+      this.changeVideoSource(this.selectedOrder);
+    } else {
+      console.log('Reached the end of the course contents.');
     }
-
-    this.changeVideoSource(this.selectedOrder);
-
   }
 
   setCurrentTime(data: any) {
@@ -214,10 +239,10 @@ export class CourseplayerComponent implements OnInit {
   }
 
   changeVideoSource(orderid: number) {
-    const currCourse = this.courseContents.find(d => d.order === orderid) as icoursecontent;
-    
+    const currCourse = this.courseContents.find(d => d.order == orderid) as icoursecontent;
+
     if (currCourse) {
-      localStorage['contentid']=currCourse.courseContentID;
+      localStorage['contentid'] = currCourse.courseContentID;
       this.currentVideoSource = currCourse.videoFileName;
       this.selectedcontentname = currCourse.contentName;
       this.selectedcontent = currCourse.courseContentID;
@@ -227,7 +252,10 @@ export class CourseplayerComponent implements OnInit {
       const videoElement = this.videoPlayer.nativeElement;
       this.progressData.contentId = currCourse.courseContentID;
       videoElement.load();
-      videoElement.play();
+      videoElement.muted = true; // Mute if autoplay restrictions apply
+      videoElement.play().catch(err => {
+        console.warn('Autoplay failed:', err);
+      });
     } else {
       console.error("No course content found for the selected orderid:", orderid);
     }
@@ -269,7 +297,7 @@ export class CourseplayerComponent implements OnInit {
         this.progressData.completed = false;
 
         this.UpdateProgress(this.userid, this.progressData);
-        console.log('Saved time:', currentTimeNew);
+       
       }
     }, intervalTime);
   }
@@ -281,7 +309,16 @@ export class CourseplayerComponent implements OnInit {
   toggleSection(index: number): void {
     this.isExpanded[index] = !this.isExpanded[index]; // Toggle the state
   }
+
+  expandSectionForCurrentContent(sectionnm: string) {
+    
+    this.sectionlist = this.courseContents.map(item => item.sectionName)
+    .filter((__values, index, self) => self.indexOf(__values) === index);
+    const sectionIndex = this.sectionlist.indexOf(sectionnm);
+   
+    if (sectionIndex !== -1) {
+      this.isExpanded[sectionIndex] = true;  // Expand the section containing the current contentId
+    }
+
+  }
 }
-
-
-//changeVideoSource('assets/videos/video1.mp4')

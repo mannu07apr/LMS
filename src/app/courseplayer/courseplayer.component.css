@@ -100,7 +100,8 @@
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  background-color: #a9a8a7;
+  background-color: #c6c6c6;
+  border-radius: 5px;
   transition: color 0.2s ease-in;
   margin-bottom: 5px;
 }

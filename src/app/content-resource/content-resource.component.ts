@@ -44,7 +44,7 @@ export class ContentResourceComponent implements OnInit {
           
         }
       );
-    console.log('this.currcontentid ', this.courseContents?.courseContentID);
+    
 
   }
 

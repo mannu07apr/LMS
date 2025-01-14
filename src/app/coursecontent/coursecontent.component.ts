@@ -52,8 +52,6 @@ export class CoursecontentComponent implements OnInit {
       .subscribe(
         (data: icoursecontent[]) => {
           this.courseContents = data.filter(d => d.courseID == courseid);
-          console.log(this.courseContents);
-
           this.sectionlist = this.courseContents.map(item => item.sectionName)
             .filter((__values, index, self) => self.indexOf(__values) === index);
 
@@ -84,11 +82,14 @@ export class CoursecontentComponent implements OnInit {
         }
       );
   }
-  PlayContent(contenttext: string, contentfile: string, contentid: number){
-    console.log(contentfile);
+  PlayContent(contenttext: string, contentfile: string, contentid: number, contentorderid: number,sectionname:string){
+    
+    console.log(' GO to player ',contentorderid);
     localStorage.setItem('contenttext', contenttext);
     localStorage.setItem('currentvideofilename', contentfile);
     localStorage.setItem('contentid', contentid.toString());
+    localStorage.setItem('selectedOrder', contentorderid.toString());
+    localStorage.setItem('sectionname', sectionname);
     this.router.navigate(['/courseplayer']);
   }
 

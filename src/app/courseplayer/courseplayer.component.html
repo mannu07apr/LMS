@@ -6,7 +6,7 @@
             <div class="video-container" (mouseenter)="showButtons()" (mouseleave)="hideButtons()">
                 <div style="padding:0px;">
                     <video #videoPlayer id="videoPlayer" preload="auto" controls controlsList="nodownload"
-                        (pause)="onPause($event)" (play)="onPlay($event)">
+                        (pause)="onPause($event)" (play)="onPlay($event)"  (ended)="PlayNext()">
                         poster="../../assets/Content Creation Mastery.jpg">
                         Your browser does not support the video tag.
                         <source src="../../{{currentVideoSource}}" type="video/mp4">

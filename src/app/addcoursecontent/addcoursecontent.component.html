@@ -39,7 +39,7 @@
             </div>
 
             <div class="row p-2">
-                <div class="col">
+                <div class="col" *ngIf="btntext!='Update Content'">
                     <input class="form-control" required type="file" id="file" (change)="onChange($event)"
                         accept="video/*">
 
