@@ -42,8 +42,8 @@ private contentdetailurl: string = '/api/CourseContent/Details';
     let productObservale = this.http.post<icoursemaster>(this.ProdApiUrl+this.createcoursemasternurl,newproduct);
     return productObservale.pipe(catchError(error => of<icoursemaster>()));
   }
-  editcoursemaster(newproduct :  icoursemaster){
-    let productObservale = this.http.post<icoursemaster>(this.ProdApiUrl+this.editcoursemasternurl,newproduct);
+  editcoursemaster(newproduct :  icoursemaster,courseid:number){
+    let productObservale = this.http.post<icoursemaster>(this.ProdApiUrl+this.editcoursemasternurl+"?id="+courseid,newproduct);
     return productObservale.pipe(catchError(error => of<icoursemaster>()));
   }
 

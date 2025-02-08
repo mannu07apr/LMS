@@ -11,7 +11,7 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    background-color: #007bff; /* Button background color */
+    background-color: #f37006; /* Button background color */
     color: white; /* Text color */
     text-decoration: none; /* Remove underline */
     border-radius: 8px; /* Rounded corners */
@@ -38,7 +38,7 @@
 }
 
 .app-button:hover {
-    background-color: #f57c13; /* Darken background on hover */
+    background-color: #f8bf04; /* Darken background on hover */
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
 }
 

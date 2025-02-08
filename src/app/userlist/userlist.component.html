@@ -10,7 +10,8 @@
     <th>mobile</th>
     <th>type</th>
     <th>Action</th>
-    <th>profile</th>
+    <th>Profile</th>
+    <th>Payment Detail</th>
     <tbody>
         <tr  *ngFor="let u of users">   <td>{{u.userId}}</td>
             <td>{{u.userName}}</td>
@@ -27,6 +28,9 @@
               }" (click)="onChangeTypeClick(u.userId,u.type)">{{ u.type === 'Paid' ? 'Paid' : 'Free' }}</button></td>
             <td>
                 <a [routerLink]="['/profile']" [queryParams]="{ userid:u.userId}">Go to Profile</a>
+            </td>
+            <td>
+                <a [routerLink]="['/payments']" [queryParams]="{ userid:u.userId}">Payments</a>
             </td>
         </tr>
        

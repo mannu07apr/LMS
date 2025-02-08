@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class UserpanelComponent implements OnInit {
   
   
-  loggedinuser?: string='5';
+  loggedinuser?: string='';
   
   ngOnInit() {
-   
+    this.loggedinuser = localStorage['userid'];
   }
 
 }

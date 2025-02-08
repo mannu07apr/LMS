@@ -62,8 +62,8 @@
             <div *ngFor="let content of courseContents let i=index">
                 <div *ngIf="content.sectionName== section">
                     <div class="textright" (click)="PlayContent(content.contentName,content.videoFileName,content.courseContentID , content.order,content.sectionName)">
-                        <img *ngIf="content.watchedTime==content.duration" width="24px" src="/assets/completed.png">
-                        <img *ngIf="content.watchedTime!=content.duration" width="24px" src="/assets/inprogress.png">
+                        <img *ngIf="content.completed" width="24px" src="/assets/completed.png">
+                        <img *ngIf="!content.completed" width="24px" src="/assets/inprogress.png">
 
                         <span
                                 class="content-name">{{ content.order }} - {{

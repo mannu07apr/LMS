@@ -18,7 +18,11 @@
       <img width="30px" src="/assets/event.png">
       <span>Event</span>
     </a>
-    <a href="userpanel" class="app-button">
+    <a *ngIf="!isAdmin()" href="userpanel" class="app-button">
+      <img width="30px" src="/assets/membership.png">
+      <span>Dashboard</span>
+    </a>
+    <a *ngIf="isAdmin()" href="adminpanel" class="app-button">
       <img width="30px" src="/assets/membership.png">
       <span>Dashboard</span>
     </a>

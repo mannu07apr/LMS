@@ -33,7 +33,6 @@ export class UserprofileService {
 
       return courselist.pipe(catchError((error) => of<IUserProfile>()));
     }
-
     updateUserType(id:string,usrtype:string,usaredata:iuser): Observable<iuser> {  
       let headers = new HttpHeaders();    
       headers = headers.append("Authorization", `Bearer ${localStorage['token']}`);

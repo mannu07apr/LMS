@@ -28,6 +28,8 @@ import { NotifierComponent } from './notifier/notifier.component';
 import { CoursecontentComponent } from './coursecontent/coursecontent.component';
 import { FileUploadModalComponent } from './file-upload-modal/file-upload-modal.component';
 import { ContentResourceComponent } from './content-resource/content-resource.component';
+import { PaymentComponent } from './payment/payment.component';
+import { MembershipsComponent } from './memberships/memberships.component';
 
 
 const routes: Routes = [
@@ -59,7 +61,8 @@ const routes: Routes = [
   { path: 'toastr', component: NotifierComponent },
   { path: 'fileupload', component: FileUploadModalComponent },
   { path: 'contentresource', component: ContentResourceComponent },
-
+  { path: 'payment/:id', component: PaymentComponent }, // Route with parameter
+  { path: 'payments', component: MembershipsComponent } // Route with parameter
 ];
 
 @NgModule({

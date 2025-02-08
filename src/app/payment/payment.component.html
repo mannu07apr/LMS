@@ -1,0 +1,69 @@
+<div class="payment-header">
+
+  <div>
+    <label for="membershipid">Payment Detail for Membership :</label>
+    <span>
+      {{ MembershipId === "2" ? 'Silver' : MembershipId === "3" ? 'Gold' : MembershipId === "4" ? 'Diamond' : 'Unknown'
+      }}
+    </span>
+  </div>
+</div>
+<form #paymentform="ngForm" (submit)="onSubmit()">
+
+  <div>
+    <label for="partOrFull">Payment Part:</label>
+    <select id="partOrFull" name="partOrFull" [(ngModel)]="paymentData.partOrFull" class="form-control" >
+      <option value="Part">Part</option>
+      <!-- <option value="Part2">Part2</option>
+      <option value="Part3">Part3(Remaining)</option> -->
+      <option value="Full">Full</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="paidamount">Paid Amount:</label>
+    <input [(ngModel)]="paymentData.paidamount" type="text" id="paidamount" name="paidamount" required  
+      class="form-control right-align">
+  </div>
+
+  <div>
+    <label for="dateOfPayment">Date of Payment: {{formattedDate}}</label>
+    <input [(ngModel)]="paymentData.dateOfPayment" type="date" id="dateOfPayment" placeholder="formattedDate"
+      [value]="formattedDate" name="dateOfPayment" required class="form-control"  pattern="[0-9]*" title="Please enter numbers only" >
+  </div>
+
+  <div>
+    <label for="paymentMode">Payment Mode:</label>
+    <select id="paymentMode" name="paymentMode" [(ngModel)]="paymentData.paymentMode" class="form-control">
+      <option value="CreditCard">Credit Card</option>
+      <option value="DebitCard">Debit Card</option>
+      <option value="UPI">UPI</option>
+      <option value="NetBanking">Net Banking</option>
+      <option value="Cash">Cash</option>
+    </select>
+  </div>
+
+
+  <div>
+    <label for="transactionID">Transaction ID:</label>
+    <input id="transactionID" name="transactionID" type="text" [(ngModel)]="paymentData.transactionID"
+      class="form-control" />
+  </div>
+
+  <div>
+    <label for="referenceNo">Reference No:</label>
+    <input id="referenceNo" name="referenceNo" type="text" [(ngModel)]="paymentData.referenceNo" class="form-control" />
+  </div>
+
+  <div>
+    <label for="imageName">Image Name:</label>
+    <input type="file" class="form-control" id="file" aria-describedby="file" aria-label="Upload"
+      (change)="onFileSelected($event)">
+    <input id="imageName" name="imageName" type="text" [(ngModel)]="paymentData.imageName" class="form-control" />
+    <div class="profilepic">
+      <img src="{{imgURL}}">
+    </div>
+  </div>
+
+  <button class="btn-sm custom-button" type="submit" value="Create Content">Submit</button>
+</form>

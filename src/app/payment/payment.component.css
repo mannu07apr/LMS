@@ -1,0 +1,41 @@
+form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  input, select, button {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .payment-header{
+    font-size: large;
+    font-weight: bold;
+    margin-top: 15px;
+    height: 60px;
+    text-align: center;
+  }
+  .profilepic img{
+    width: 100%;
+    border: 1px solid black;
+    object-fit:fill;
+  }
+  .right-align {
+    text-align: right;
+  }

@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    localStorage.setItem('usertype', 'Free');
+    //localStorage.setItem('usertype', 'Free');
   //  this.sharedservice.changeUserType("Free");
   }
 

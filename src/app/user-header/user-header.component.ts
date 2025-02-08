@@ -15,14 +15,14 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
   loggedinuser: any;
   usertype: any = '';
   subscription!: Subscription;
-  
+
   buttonText: string = 'Login';
   buttonImage: string = '/assets/login.png';
 
-  constructor(private router: Router,    
+  constructor(private router: Router,
     private authService: AuthService
   ) {
-    
+
   }
 
   ngOnDestroy(): void {
@@ -38,8 +38,8 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.islogged = localStorage['islogged'] === 'true';
-    // this.loggedinuser = localStorage['loggedinuser'];
-     this.usertype = localStorage['usertype'];
+     this.loggedinuser = localStorage['loggedinuser'];
+    this.usertype = localStorage['usertype'];
     this.updateButton();
     // Subscribe to changes in login state
     this.authService.loginStatusChanged.subscribe(() => {
@@ -47,7 +47,8 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
     });
   }
   isAdmin(): boolean {
-    return this.usertype === "Admin";
+    
+    return this.usertype === "Admin" ||  this.loggedinuser=="Shailendra Jethiwal" ;
   }
   updateButton(): void {
     const isLogged = localStorage.getItem('islogged') === 'true';
@@ -58,8 +59,8 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
 
   toggleLogin(): void {
     const isLogged = localStorage.getItem('islogged') === 'true';
-       this.authService.setLoginStatus(!isLogged);
-       if(!this.islogged){this.logout();}
+    this.authService.setLoginStatus(!isLogged);
+    if (!this.islogged) { this.logout(); }
   }
 
   login() {

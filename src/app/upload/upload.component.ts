@@ -23,6 +23,7 @@ export class UploadComponent implements OnInit {
   uploadedFiles: { name: string; url: string }[] = [];
   imgURL: string[] = [];
   images: string = '';
+  isEditing: boolean = false;
 
   coursedata: icoursemaster = {
     courseID: 0,
@@ -73,13 +74,27 @@ export class UploadComponent implements OnInit {
   CreatCourseMaster() {
     var msg: String = "";
     if (this.coursedata.courseName != "" && this.coursedata.price > 0 && this.coursedata.type != "" && this.coursedata.imageName != "") {
-      this.courseService.newcoursemaster(this.coursedata)
+
+      if (this.isEditing) {
+        this.courseService.editcoursemaster(this.coursedata,this.coursedata.courseID)
         .subscribe(
           (data: icoursemaster) => {
             this.upload();
             this.notifyservice.ShowSuccess("Upload", "Course created successfully.");
           }
         );
+       }
+      else {
+        this.courseService.newcoursemaster(this.coursedata)
+          .subscribe(
+            (data: icoursemaster) => {
+              this.upload();
+              this.notifyservice.ShowSuccess("Upload", "Course created successfully.");
+            }
+          );
+        //editcoursemaster
+      }
+      this.isEditing = false;
     }
     else {
 
@@ -133,6 +148,7 @@ export class UploadComponent implements OnInit {
   }
   SelectCourse(coursedetail: icoursemaster) {
     this.coursedata = coursedetail;
+    this.isEditing = true;
     this.GetResourceList(coursedetail.courseID);
     console.log(coursedetail);
   }

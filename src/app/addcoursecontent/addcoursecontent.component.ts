@@ -56,8 +56,7 @@ export class AddcoursecontentComponent implements OnInit {
   selectedItem: icoursecontent | null = null;
   ccoursedata: icoursecontent | undefined;
 
-  constructor(private http: HttpClient,
-    private router: Router,
+  constructor(
     private imageUploadService: ImageUploadService,
     private courseService: CourseService,
     public mediaService: MediaService,
@@ -126,7 +125,6 @@ export class AddcoursecontentComponent implements OnInit {
       this.courseService.updtaecoursecontent(this.coursedata.courseContentID, this.coursedata)
         .subscribe(
           (data: icoursecontent) => {
-
             this.uploaded = false;
             this.progress = 0;
             if (!this.uploaded) {

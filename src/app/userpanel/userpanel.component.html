@@ -9,7 +9,7 @@
       <img width="30px" src="/assets/manage_accounts.png">
       <span>My Profile </span>
     </a>
-    <a href="subscription" class="app-button">
+    <a href="payments?userid={{loggedinuser}}" class="app-button">
       <img width="30px" src="/assets/membership.png">
       <span>My Subscription</span>
     </a>
@@ -21,6 +21,11 @@
       <img width="30px" src="/assets/settings.png">
       <span>Settings</span>
     </a>
+    <a href="payment/{{loggedinuser}}" class="app-button">
+      <img width="30px" src="/assets/payment.png">
+      <span>Add Payment Detail</span>
+    </a>
+ 
     <a href="helpandsupport" class="app-button">
       <img width="30px" src="/assets/help.png">
       <span>Help & Support</span>

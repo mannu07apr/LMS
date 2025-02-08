@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CouponService } from '../coupon.service';
 import { icoupon } from '../../assets/model/icoupon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-membershiphome',
@@ -19,7 +20,7 @@ export class MembershiphomeComponent implements OnInit {
     endDate: new Date()
   };
   coupons: icoupon[] = [];
-  constructor(private couponservice: CouponService) {
+  constructor(private couponservice: CouponService,private router: Router) {
 
   }
 
@@ -38,5 +39,9 @@ export class MembershiphomeComponent implements OnInit {
           }
         }
       );
+  }
+  openPayment(id: string): void {
+    // Navigate to the PaymentComponent and pass the ID as a route parameter
+    this.router.navigate(['/payment', id]);
   }
 }

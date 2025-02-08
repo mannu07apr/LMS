@@ -48,6 +48,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ContentResourceComponent } from './content-resource/content-resource.component';
 import { QuillModule } from 'ngx-quill';
+import { PaymentComponent } from './payment/payment.component';
+import { MembershipsComponent } from './memberships/memberships.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,9 @@ import { QuillModule } from 'ngx-quill';
     ProgressBarComponentComponent,
     RateThisCourseComponent,
     FileUploadModalComponent,
-    ContentResourceComponent
+    ContentResourceComponent,
+    PaymentComponent,
+    MembershipsComponent
   ],
   imports: [
     FormsModule,

@@ -32,6 +32,10 @@ export class CoursecontentComponent implements OnInit {
 
   }
 
+  //subject behavuiy
+//input set
+//global sstor watch
+
   ngOnInit(): void {
     this.courseid = localStorage['courseid'];
     this.userid = localStorage['userid'];

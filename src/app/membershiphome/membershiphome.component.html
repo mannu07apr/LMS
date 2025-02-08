@@ -1,7 +1,8 @@
 
       
+<div style="height: 30px;border: 0px solid gray;border-radius: 5px;width: 70%;margin:20px  auto;">
 
-    
+</div>   
 
 <div class="card-container">
     <!-- Silver Membership Card -->
@@ -15,7 +16,7 @@
             - Monthly newsletter<br>
             - Email support
         </div>
-        <button class="card-button join">Join Now</button>
+        <button class="card-button"  (click)="openPayment('2')">Join Now</button>
       <div *ngIf="coupon.amount>0">  Get Discount {{coupon.amount}} with Coupon {{coupon.couponCode}}</div>
     </div>
 
@@ -28,7 +29,7 @@
             - Priority support<br>
             - Exclusive offers
         </div>
-        <button class="card-button">Join Now</button>
+        <button class="card-button" (click)="openPayment('3')">Join Now</button>
     </div>
 
     <!-- Diamond Membership Card -->
@@ -40,6 +41,6 @@
             - Personal account manager<br>
             - VIP events invitations
         </div>
-        <button class="card-button">Join Now</button>
+        <button class="card-button"  (click)="openPayment('4')">Join Now</button>
     </div>
 </div>

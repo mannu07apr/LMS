@@ -8,7 +8,7 @@ export class NotifierService {
 
   constructor(private tostr:ToastrService) { }
 
-  ShowSuccess(title:string,msg:string){
+  ShowSuccess(title: string, msg: string){
     this.tostr.success(msg,title);
   }
   ShowError(title:string,msg: string) {

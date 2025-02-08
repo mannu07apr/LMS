@@ -8,6 +8,7 @@ import { __values } from 'tslib';
 import { MediaService } from '../media.service';
 import { iUpdateProgress } from '../../assets/model/iUpdateProgress';
 import { iresource } from '../../assets/model/iresource';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 
 @Component({
@@ -70,7 +71,7 @@ export class CourseplayerComponent implements OnInit {
   resourcelist: iresource[] = [];
   isExpanded: boolean[] = [];
   sectionname: string = '';
-
+  subject = new BehaviorSubject<number>(0);
   private intervalId: any;
 
   constructor(private http: HttpClient,
@@ -82,6 +83,7 @@ export class CourseplayerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  const subject = new BehaviorSubject<number>(0);
 
     this.courseid = localStorage['courseid'];
     this.userid = localStorage['userid'];
@@ -97,6 +99,7 @@ export class CourseplayerComponent implements OnInit {
     }
     else {
       this.GetCourseList(this.userid, this.courseid);
+      subject.subscribe((data)=> (console.log('Time elapsed :',data)));
         this.startAutoSave();
     }
 
@@ -260,10 +263,10 @@ export class CourseplayerComponent implements OnInit {
       console.error("No course content found for the selected orderid:", orderid);
     }
 
-    // if ((this.isPaidUser()) || (this.isFreeUser() && currCourse.order == 1)) { }
-    // else {
-    //   this.router.navigateByUrl('membershipcard');
-    // }
+    if ((this.isPaidUser()) || (this.isFreeUser() && currCourse.order == 1)) { }
+    else {
+      this.router.navigateByUrl('membershipcard');
+    }
   }
 
   UpdateProgress(userID: number, progress: iUpdateProgress) {
@@ -271,7 +274,9 @@ export class CourseplayerComponent implements OnInit {
     this.courseService.updateProgress(userID, progress)
       .subscribe(
         (data: iUpdateProgress) => {
-          console.log("Progress updated");
+          console.log("Progress updated :",progress.watchedDuration);
+          this.subject.next(progress.watchedDuration);
+          this.subject.subscribe((data)=> (console.log('Time elapsed :',data)));
         }
       );
 

@@ -4,6 +4,7 @@ import { IUserProfile } from '../../assets/model/iuserprofile';
 import { UserprofileService } from '../userprofile.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImageUploadService } from '../image-upload.service';
+import { NotifierService } from '../notifier.service';
 
 
 @Component({
@@ -37,7 +38,12 @@ export class ProfileComponent implements OnInit {
   imgURL: string = '';
   isProfileExist: boolean = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, private userprofileservice: UserprofileService, private imageUploadService: ImageUploadService) { }
+  constructor(private route: ActivatedRoute, 
+    private http: HttpClient, 
+    private router: Router,
+    private userprofileservice: UserprofileService, 
+    private imageUploadService: ImageUploadService,
+    private notifyservice: NotifierService) { }
   ngOnInit(): void {
     this.islogged = localStorage['islogged'] === 'true';
     this.usertype = localStorage['usertype'];
@@ -49,6 +55,12 @@ export class ProfileComponent implements OnInit {
     const file: File = event.target.files[0];
     this.selectedfiles = event.target.files;
     if (file) {
+      if (file.size > 1048576) {
+        this.notifyservice.ShowError("Error in payment", 'File size exceeds 1 MB. Please select a smaller file.');
+        
+        event.target.value = ''; // Clear the file input
+        return;
+      }
       let reader = new FileReader();
       reader.onload = (e: any) => {
         this.imgURL = e.target.result;
