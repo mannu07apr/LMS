@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MembershipsComponent implements OnInit {
   paymentData: ipayment[] = [];
   loggedinuser: any;
+  loggedinusername: any;
   usertype:any='';
   userId: number=0;
 
@@ -20,17 +21,17 @@ export class MembershipsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loggedinuser = localStorage['userid'];
+    this.loggedinuser = localStorage['userid'];    
+    this.loggedinusername = localStorage['loggedinuser'];
     this.usertype = localStorage['usertype'];
     
     this.route.queryParams.subscribe(params => {
       this.userId = Number(this.route.snapshot.queryParamMap.get('userid')) ;
       console.log('Selected userId ID:', this.userId);
     });
-
     this.cuponservice.getPayment()
     .subscribe((data: ipayment[]) => {
-      this.paymentData = (this.usertype === 'Admin' && this.userId === 0)
+      this.paymentData = ((this.loggedinusername === 'Shailendra Jethiwal' || this.usertype === 'Admin') && this.userId === 0)
         ? data
         : data.filter(d => d.userid === this.userId);
     });

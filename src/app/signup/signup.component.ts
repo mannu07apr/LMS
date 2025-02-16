@@ -9,6 +9,7 @@ import { NotifierService } from '../notifier.service';
 interface user {
   userId: number;
   userName: string;
+  userCode:string;
   mobile: string;
   userEmail: string;
   password: string;
@@ -22,9 +23,9 @@ interface user {
 export class SignupComponent implements OnInit {
   
   message: string = '';
-
   userdata: user = {
     userId: 0,
+    userCode:'',
     userName: '',
     mobile: '',
     userEmail: '',
@@ -72,6 +73,7 @@ export class SignupComponent implements OnInit {
         this.message = 'Login Created';
         this.userdata = {
           userId: 0,
+          userCode:'',
           userName: '',
           mobile: '',
           userEmail: '',

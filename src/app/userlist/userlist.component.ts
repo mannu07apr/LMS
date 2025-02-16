@@ -27,7 +27,6 @@ export class UserlistComponent implements OnInit {
 
   getUser() {
     let headers = new HttpHeaders();
-
     headers = headers.append("Authorization", `Bearer ${localStorage['token']}`);
     this.http.get<iuser[]>(this.ProdApiUrl + "api/Users", { headers }).subscribe(
       (response) => {
@@ -43,6 +42,19 @@ export class UserlistComponent implements OnInit {
   }
 
 
+  onBlockUserTypeClick(updateuserId: string, updatedUserType: string): void {
+
+    const newUserType =  'Blocked';
+
+    let updateuser = this.users.filter(c => c.userId === updateuserId);
+    updateuser[0].type = newUserType;
+   
+    this.userService.updateUserType(updateuserId, newUserType, updateuser[0]).subscribe(
+      (data: iuser) => {
+         console.log(data);
+      }
+    );
+  }
 
   onChangeTypeClick(updateuserId: string, updatedUserType: string): void {
 
@@ -55,7 +67,7 @@ export class UserlistComponent implements OnInit {
       (data: iuser) => {
          console.log(data);
       }
-    );;
+    );
   }
 
   onclick(): void {

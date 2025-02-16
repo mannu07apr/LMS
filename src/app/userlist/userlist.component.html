@@ -1,9 +1,10 @@
 <a class="btn-sm btn-info" href="adminpanel">Admin Panel</a>
-<p  style="text-align: center;color:white;background-color: red; font-size: large;">{{message}}</p>
+<p style="text-align: center;color:white;background-color: red; font-size: large;">{{message}}</p>
 <button (click)="onclick()">Export in excel</button>
 
 <table id="customers">
     <th>User ID</th>
+    <th>User Code</th>
     <th>Name</th>
     <th>email</th>
     <th>password</th>
@@ -13,27 +14,47 @@
     <th>Profile</th>
     <th>Payment Detail</th>
     <tbody>
-        <tr  *ngFor="let u of users">   <td>{{u.userId}}</td>
+        <tr *ngFor="let u of users" [ngStyle]="{ 
+                'background-color': u.type === 'Blocked' ? '#D52A31':'white', 
+                'color':  u.type === 'Blocked' ? '#FA8F8B':'#222244', 
+                'border': 'none', 
+                'padding': '5px 10px', 
+                'cursor': 'pointer' 
+            }">
+            <td>{{u.userId}}</td>
+            <td>{{u.userCode}}</td>
             <td>{{u.userName}}</td>
             <td>{{u.userEmail}}</td>
             <td>{{u.password}}</td>
             <td>{{u.mobile}}</td>
             <td>{{u.type}}</td>
-            <td>  <button [ngStyle]="{ 
-                'background-color': u.type === 'Paid' ? 'green' : 'orange', 
-                'color': 'white', 
-                'border': 'none', 
-                'padding': '5px 10px', 
-                'cursor': 'pointer' 
-              }" (click)="onChangeTypeClick(u.userId,u.type)">{{ u.type === 'Paid' ? 'Paid' : 'Free' }}</button></td>
-            <td>
-                <a [routerLink]="['/profile']" [queryParams]="{ userid:u.userId}">Go to Profile</a>
+            <td> <button [ngStyle]="{ 
+                    'background-color': u.type === 'Paid' ? 'green' : 'orange', 
+                    'color': 'white', 
+                    'border': 'none', 
+                    'padding': '5px 10px', 
+                    'cursor': 'pointer' 
+                }" (click)="onChangeTypeClick(u.userId,u.type)">{{ u.type === 'Paid' ? 'Paid' : 'Free' }}</button>
+                <button [ngStyle]="{ 
+                    'background-color':  '#a30102', 
+                    'color': 'white', 
+                    'border': 'none', 
+                    'padding': '5px 10px', 
+                    'cursor': 'pointer' 
+                }" (click)="onBlockUserTypeClick(u.userId,'Blocked')">Block</button>
+
             </td>
             <td>
-                <a [routerLink]="['/payments']" [queryParams]="{ userid:u.userId}">Payments</a>
+                <a [ngStyle]="{ 
+                       'color': u.type === 'Blocked' ? '#FFF' : '#157DEA',   'cursor': 'pointer' }"
+                        [routerLink]="['/profile']" [queryParams]="{ userid:u.userId}">Go to Profile</a>
+            </td>
+            <td>
+                <a [ngStyle]="{ 
+                        'color': u.type === 'Blocked' ? '#FFF' : '#157DEA',     'cursor': 'pointer' }"
+                    [routerLink]="['/payments']" [queryParams]="{ userid:u.userId}">Payments</a>
             </td>
         </tr>
-       
+
     </tbody>
 </table>
-  
