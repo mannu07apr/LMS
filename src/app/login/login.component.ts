@@ -61,7 +61,8 @@ export class LoginComponent {
           localStorage.setItem('usertype', response.userType);
           localStorage.setItem('token', response.token);
           localStorage.setItem('userid', response.userID);
-          
+          localStorage.setItem('usercode', response.userCode);
+          console.log('usercode :', response);
           this.authService.setLoginStatus(true);
           //this.sharedService.changetext('Logout');
           this.sharedService.changeUserType(response.userType);

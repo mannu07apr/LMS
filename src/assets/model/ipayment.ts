@@ -1,6 +1,7 @@
 export interface ipayment{
     paymentId: number;
     userid: number;
+    userCode:string;
     membershipid: number;
     paidamount: number;
     dateOfPayment: Date;

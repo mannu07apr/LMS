@@ -32,23 +32,40 @@ export class ProfileComponent implements OnInit {
   };
   islogged: boolean = false;
   loggedinuser: string = '';
+  selecteduser: any;
   usertype: any;
   message: string = "";
   selectedfiles!: FileList;
   imgURL: string = '';
   isProfileExist: boolean = false;
+  userName: string = '';
 
-  constructor(private route: ActivatedRoute, 
-    private http: HttpClient, 
+  constructor(private route: ActivatedRoute,
+    private http: HttpClient,
     private router: Router,
-    private userprofileservice: UserprofileService, 
+    private userprofileservice: UserprofileService,
     private imageUploadService: ImageUploadService,
     private notifyservice: NotifierService) { }
+
   ngOnInit(): void {
     this.islogged = localStorage['islogged'] === 'true';
     this.usertype = localStorage['usertype'];
     this.loggedinuser = localStorage['userid'];
-    this.GetUserProfile(this.loggedinuser);
+    this.userName = localStorage['loggedinuser'];
+
+    if (this.userName === 'Shailendra Jethiwal') {
+
+      this.route.queryParamMap.subscribe(params => {
+        this.selecteduser = params.get('userid')?.toString(); // Get 'id' from query parameters
+       
+      });
+
+      this.GetUserProfile( this.selecteduser);
+    }
+    else {
+      this.GetUserProfile(this.loggedinuser);
+    }
+    console.log('loggedinuser User ID:', this.loggedinuser);
   }
 
   onFileSelected(event: any) {
@@ -57,7 +74,7 @@ export class ProfileComponent implements OnInit {
     if (file) {
       if (file.size > 1048576) {
         this.notifyservice.ShowError("Error in payment", 'File size exceeds 1 MB. Please select a smaller file.');
-        
+
         event.target.value = ''; // Clear the file input
         return;
       }
@@ -100,7 +117,7 @@ export class ProfileComponent implements OnInit {
         );
     }
     else {
-      this.userprofile.userid =  localStorage['userid']; 
+      this.userprofile.userid = localStorage['userid'];
       this.userprofileservice.createUserProfile(this.userprofile)
         .subscribe(
           (data: IUserProfile) => {

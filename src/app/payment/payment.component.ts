@@ -21,6 +21,7 @@ export class PaymentComponent implements OnInit {
   paymentData: ipayment = {
     paymentId: 0,
     userid: 0,
+    userCode:'',
     membershipid: 0,
     paidamount: 0,
     dateOfPayment: new Date(),
@@ -32,6 +33,7 @@ export class PaymentComponent implements OnInit {
   };
   selectedfiles!: FileList;
   imgURL: string = '';
+  usercode: string='';
 
 
   constructor(
@@ -47,7 +49,9 @@ export class PaymentComponent implements OnInit {
     this.formattedDate = today.toISOString().split('T')[0];
     this.MembershipId = this.route.snapshot.paramMap.get('id') || '';
     this.userid = localStorage['userid'];
+    this.usercode = localStorage['usercode'];
     this.paymentData.userid = this.userid;
+    this.paymentData.userCode = this.userid.toString();
     this.paymentData.membershipid = parseInt(this.MembershipId);
     this.paymentData.dateOfPayment = new Date();
     // If you expect the parameter to change while on the same component, use subscribe
@@ -84,8 +88,7 @@ export class PaymentComponent implements OnInit {
     this.selectedfiles = event.target.files;
     if (file) {
       if (file.size > 1048576) {
-        this.notifyservice.ShowError("Error in payment", 'File size exceeds 1 MB. Please select a smaller file.');
-        
+        this.notifyservice.ShowError("Error in payment", 'File size exceeds 1 MB. Please select a smaller file.');        
         event.target.value = ''; // Clear the file input
         return;
       }
